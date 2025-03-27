@@ -55,23 +55,71 @@
 # print(l, new_lista)
 
 #EX6 - Dada uma lista de números inteiros e um número alvo, escreva uma função que encontre todas as sublistas contínuas cuja soma seja igual ao número alvo.
-new_list = []
-final_list = []
-l = [1, 2, 3, 4, 2, 1, 5, 6] 
-alvo = 6
-for i in l:
-    new_list.append(i)
-    if (sum(new_list) == 6):
-        print('Deu certo')
-        # print(new_list)
-        final_list.append(new_list[:])
-        print(final_list)
-        print(new_list)
-        print(len(new_list))
-        new_list = []
-        continue
-    else:
-        continue
+# new_list = []
+# final_list = []
+# l = [1, 2, 3, 4, 2, 1, 5, 6] 
+# alvo = 6
+# for i in l:
+#     new_list.append(i)
+#     if (sum(new_list) == 6):
+#         print('Deu certo')
+#         # print(new_list)
+#         final_list.append(new_list[:])
+#         print(final_list)
+#         print(new_list)
+#         print(len(new_list))
+#         new_list = []
+#         continue
+#     else:
+#         continue
 
-# print(f'Lista new {new_list}')
-print(f'Lista final {final_list}')
+# # print(f'Lista new {new_list}')
+# print(f'Lista final {final_list}')
+
+#EX7 - Crie uma função que inverta os elementos de uma lista sem usar o método reverse() ou slicing.
+# l = [2,4,5,9,0,12,22,33,16]
+# new_list = []
+# for i in l:
+#     print(i)
+#     new_list.insert(0, i)
+# print(new_list)
+
+#EX8 - Crie uma função que receba uma lista de números e retorne uma outra lista contendo o maior e o menor número da lista.
+# new_list = []
+# l = []
+# maior = 0
+# menor = 99999
+# for i in range(1, 5):
+#     n = int(input('Numero: '))
+#     l.append(n)
+# for x in l:
+#     if(x > maior):
+#         maior = x
+#     if(x < menor):
+#         menor = x
+# new_list.append(maior)
+# new_list.append(menor)
+# print(new_list)
+
+#EX9 - Dada uma lista de números, crie uma função que retorne uma nova lista contendo apenas os números ímpares.
+# l = []
+# for i in range(1, 4):
+#     n = int(input('Numero: '))
+#     l.append(n)
+    
+# lista_impar = []
+# for m in l:
+#     if (m % 2 == 1):
+#         lista_impar.append(m)
+# print(f'A lista com números impar {lista_impar}')
+
+#EX10 - Dada uma lista de números, crie uma função que remova todos os números negativos e zero, deixando apenas os números positivos.
+# l = []
+# for i in range(1, 5):
+#     n = int(input('Numero: '))
+#     l.append(n)
+# for x in l:
+#     if(x <= 0):
+#         l.remove(x)
+# print(l)
+    
