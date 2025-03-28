@@ -122,4 +122,25 @@
 #     if(x <= 0):
 #         l.remove(x)
 # print(l)
+
+#EX11 - Dada duas listas de números inteiros, escreva uma função que retorne a união dessas listas, sem duplicados.
+# l = [1,3,89,1,9, 19]
+# l2 = [1,3,4,8,12, 19,120]
+# lista_temp = []
+# for x in l:
+#     print(x)
+#     if x in l2:
+#         print('Igual')
+#         print(x)
+#         l.remove(x)
+# for m in l2:
+#     if m in l:
+#         l2.remove(m)
+# # print(l)
+# # print(l2)
+# l.extend(l2)
+# l.sort()
+# print(l)
+
+
     
