@@ -142,5 +142,51 @@
 # l.sort()
 # print(l)
 
+#EX 12 - Crie uma função que receba uma lista de números e retorne a soma de todos os elementos, sem usar a função sum()
+# lista = []
+# soma = 0
+# for i in range(1, 6):
+#     n = int(input('Numero: '))
+#     lista.append(n)
+#     soma = soma + n
+# print(lista)
+# print(soma)
 
-    
+#------------------------------------------------------------------------------------------------ REFAZER DEPOIS
+#EX13 - Crie uma função que ordene uma lista de números de forma crescente, sem usar o método sort
+# l = [1,3,7,2,19,10,12]
+# n = len(l)
+# for i in range(n):
+#     index_primary = i
+#     for x in range(i + 1, n):
+#         if l[x] < l[index_primary]:
+#             index_primary = x
+#     l[i], l[index_primary] = l[index_primary], l[i]
+# print(l)
+
+#EX14 - Crie uma função que conte o número de ocorrências de um determinado elemento em uma lista
+# lista = [1, 2, 3, 2, 4, 2]
+# ocorrencia = int(input('Digite o número que você quer verificar quantas vezes apareceu: '))
+# contador = 0
+# for i in lista:
+#     print(i)
+#     if i == ocorrencia:
+#         contador = contador + 1
+        
+# print(f'Ele apareceu {contador} vezes')
+
+#EX15 - Crie uma função que receba uma lista e retorne uma nova lista contendo apenas os elementos em posições ímpares (começando do índice 0).
+# lista = [1,    3, 4, 5, 6]
+# new_list = []
+# tamanho = len(lista)
+# for i in range(tamanho):
+#     if (i % 2 == 1):
+#         new_list.append(lista[i])
+#     else:
+#         continue
+# print(new_list)
+
+        lista[x] = m
+
+
+            
