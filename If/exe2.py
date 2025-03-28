@@ -165,3 +165,44 @@
 #     else:
 #         print('Não é primo!')
 #         print(conta)
+
+
+
+# #EX11 - Sistema de hotel numa colônia de férias
+# import os
+# pessoas = int(input('Quantas pessoas ficaram hospedadas? '))
+# tipo_apartamento = int(input('Qual o tipo do partamento (1/2)? '))
+# qtd_dias = int(input('Quantos dia vocês vão ficar? '))
+# if (pessoas > 6):
+#     print('Não é possível essa quantidade de pessoa! ')
+# else:
+#     if (tipo_apartamento == 1):
+#         if (pessoas == 1):
+#             diaria = qtd_dias * 20
+#         elif (pessoas == 2):
+#             diaria = qtd_dias * 28
+#         elif (pessoas == 3):
+#             diaria = qtd_dias * 35
+#         elif (pessoas == 4):
+#             diaria = qtd_dias * 42
+#         elif (pessoas == 5):
+#             diaria = qtd_dias * 48
+#         elif (pessoas == 6):
+#             diaria = qtd_dias * 53
+#     elif(tipo_apartamento == 2):
+#         if (pessoas == 1):
+#             diaria = qtd_dias * 25
+#         elif (pessoas == 2):
+#             diaria = qtd_dias * 34
+#         elif (pessoas == 3):
+#             diaria = qtd_dias * 42
+#         elif (pessoas == 4):
+#             diaria = qtd_dias * 50
+#         elif (pessoas == 5):
+#             diaria = qtd_dias * 57
+#         elif (pessoas == 6):
+#             diaria = qtd_dias * 63
+#     else:
+#         print('Esse tipo de apartamento não existe no nosso catálogo! ')
+# print(f'O valor final a pagar pelas {qtd_dias} noites será de: {diaria}')
+
