@@ -186,7 +186,7 @@
 #         continue
 # print(new_list)
 
-        lista[x] = m
+        # lista[x] = m
 
 
             
