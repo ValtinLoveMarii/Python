@@ -206,3 +206,88 @@
 #         print('Esse tipo de apartamento não existe no nosso catálogo! ')
 # print(f'O valor final a pagar pelas {qtd_dias} noites será de: {diaria}')
 
+
+
+# #EX12 - SISTEMA DE HOTEL ATUALIZADO, MAIS COMPLEXO E COMPLETO
+# from rich.console import Console
+# from rich.table import Table
+# import os
+# while True:
+#     try:
+#         pessoas = int(input('Quantas pessoas ficaram hospedadas? '))
+#         tipo_apartamento = int(input('Qual o tipo do partamento (1/2)? '))
+#         qtd_dias = int(input('Quantos dia vocês vão ficar? '))
+#         verificacao = False
+#         if (pessoas > 6):
+#             os.system('cls')
+#             print('Não é possível essa quantidade de pessoa! ')
+#             continue
+#         else:
+#             if (tipo_apartamento == 1):
+#                 if (pessoas == 1):
+#                     diaria = qtd_dias * 20
+#                 elif (pessoas == 2):
+#                     diaria = qtd_dias * 28
+#                 elif (pessoas == 3):
+#                     diaria = qtd_dias * 35
+#                 elif (pessoas == 4):
+#                     diaria = qtd_dias * 42
+#                 elif (pessoas == 5):
+#                     diaria = qtd_dias * 48
+#                 elif (pessoas == 6):
+#                     diaria = qtd_dias * 53
+#                 verificacao = True
+#             elif(tipo_apartamento == 2):
+#                 if (pessoas == 1):
+#                     diaria = qtd_dias * 25
+#                 elif (pessoas == 2):
+#                     diaria = qtd_dias * 34
+#                 elif (pessoas == 3):
+#                     diaria = qtd_dias * 42
+#                 elif (pessoas == 4):
+#                     diaria = qtd_dias * 50
+#                 elif (pessoas == 5):
+#                     diaria = qtd_dias * 57
+#                 elif (pessoas == 6):
+#                     diaria = qtd_dias * 63
+#                 verificacao = True
+#             else:
+#                 os.system('cls')
+#                 print('Esse tipo de apartamento não existe no nosso catálogo! ')
+#                 continue
+
+#         if (verificacao == True):
+#             os.system('cls')
+#             # Criando o console
+#             console = Console()
+#             # Exemplo de texto colorido e estilizado
+
+#             console.print("Detalhes da sua Hospedagem!", style="bold white")
+
+#             # Criando uma tabela
+#             table = Table(title="")
+#             table.add_column("Tipo Apartamento", justify="center", style="blue")
+#             table.add_column("Quantidade de Pessoas", justify="center", style="purple")
+#             table.add_column("Quantidade de dias hospedados", justify="center", style="red")
+#             table.add_column("Valor final da hospedagem", justify="center", style="cyan")
+
+#             # Adicionando uma linha de dados
+#             table.add_row(str(tipo_apartamento),str(pessoas), str(qtd_dias), str(diaria))
+#             console.print(table)
+            
+#         else:
+#             continue
+
+#         continuar = str(input('Deseja continuar? (s/n)? ')).upper()
+#         if (continuar == 'S'):
+#             # os.system('cls')
+#             continue
+#         elif (continuar == 'N'):
+#             break
+
+#     except ValueError as error:
+#         os.system('cls')
+#         print('Erro no Tipo de dado inserido')
+#         print('tente denovo!')
+#         print(error)
+
