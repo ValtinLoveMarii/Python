@@ -11,7 +11,7 @@
 #     lista.append(n)
 # lista = tuple(lista)
 # print(f"""Sua tupla foi criada! O valor do segundo número: {lista[1]} O tipo de dado: {type(lista)}
-#     """)
+# """)
 
 #EX3 - Dada a tupla frutas = ("maçã", "banana", "laranja", "uva"), imprima: O primeiro e o último elemento da tupla. O terceiro elemento usando índice negativo.
 # lista = []
@@ -69,5 +69,40 @@
 #         l.append(i)
 # print(f'O número 2 aparece {len(l)} vezes')
 
+#EX8 - junção do ex6 e o ex5
+# tupla = (1, 3,9, 7, 9)
+# l = []
+# for i in range(len(tupla)):
+#     globals()[f'variavel{i}'] = None
+# for x in range(len(tupla)):
+#     globals()[f'variavel{x}'] = tupla[x]
+#     l.append(globals()[f'variavel{x}'])
+# exist = False
+# for m in l:
+#     if (5 in l):
+#         exist = True
+#         break
+#     else:
+#         continue
+# if exist == True:
+#     print('Sim existe! ')
+# else:
+#     print('Não existe')
 
+# #EX9 - Dada a tupla cores = ("vermelho", "azul", "verde"), converta-a para uma lista, substitua "azul" por "amarelo" e, em seguida, transforme-a novamente em tupla.
+# tupla = ("red","blue","green")
+# tupla = list(tupla)
+# tupla[1] = "yellow"
+# tupla = tuple(tupla)
+# print(f'New tuple {tupla}, type of the value {type(tupla)}')
 
+#EX10 - Dada a tupla dados = ("Carlos", 25, "Brasil"), desempacote seus valores em três variáveis: nome, idade e pais, e depois imprima cada um.
+# tupla = ("Peter", 43, "Brazil")
+# list_names = ['name', 'age', 'nation']
+# x=0
+# for i in list_names:
+#     globals ()[f'{i}'] = None
+# for x in range(len(tupla)):
+#     print(globals()[list_names[x]])
+#     globals()[list_names[x]] = tupla[x]
+# print(globals())
