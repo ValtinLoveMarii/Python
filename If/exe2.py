@@ -211,7 +211,17 @@
 # #EX12 - SISTEMA DE HOTEL ATUALIZADO, MAIS COMPLEXO E COMPLETO
 # from rich.console import Console
 # from rich.table import Table
-# import os
+# from termcolor import colored
+# from babel.numbers import format_currency as fc
+# import os 
+# titulo = """
+#  ██████ ██   ██ ███████  █████  ██████   █████  ██████  ████████ 
+# ██      ██   ██ ██      ██   ██ ██   ██ ██   ██ ██   ██    ██    
+# ██      ███████ █████   ███████ ██████  ███████ ██████     ██    
+# ██      ██   ██ ██      ██   ██ ██      ██   ██ ██   ██    ██    
+#  ██████ ██   ██ ███████ ██   ██ ██      ██   ██ ██   ██    ██                                                                
+# """
+# print(colored(titulo,'blue'))
 # while True:
 #     try:
 #         pessoas = int(input('Quantas pessoas ficaram hospedadas? '))
@@ -220,7 +230,7 @@
 #         verificacao = False
 #         if (pessoas > 6):
 #             os.system('cls')
-#             print('Não é possível essa quantidade de pessoa! ')
+#             print(colored('Não é possível essa quantidade de pessoa!', 'red'))
 #             continue
 #         else:
 #             if (tipo_apartamento == 1):
@@ -253,7 +263,7 @@
 #                 verificacao = True
 #             else:
 #                 os.system('cls')
-#                 print('Esse tipo de apartamento não existe no nosso catálogo! ')
+#                 print(colored('Esse tipo de apartamento não existe no nosso catálogo! ', 'red'))
 #                 continue
 
 #         if (verificacao == True):
@@ -262,32 +272,36 @@
 #             console = Console()
 #             # Exemplo de texto colorido e estilizado
 
-#             console.print("Detalhes da sua Hospedagem!", style="bold white")
+#             console.print("Detalhes da sua Hospedagem!", style="bold green")
 
 #             # Criando uma tabela
 #             table = Table(title="")
-#             table.add_column("Tipo Apartamento", justify="center", style="blue")
-#             table.add_column("Quantidade de Pessoas", justify="center", style="purple")
-#             table.add_column("Quantidade de dias hospedados", justify="center", style="red")
-#             table.add_column("Valor final da hospedagem", justify="center", style="cyan")
+#             table.add_column("Tipo Apartamento", justify="center", style="green")
+#             table.add_column("Quantidade de Pessoas", justify="center", style="green")
+#             table.add_column("Quantidade de dias hospedados", justify="center", style="green")
+#             table.add_column("Valor final da hospedagem", justify="center", style="green")
 
 #             # Adicionando uma linha de dados
-#             table.add_row(str(tipo_apartamento),str(pessoas), str(qtd_dias), str(diaria))
+#             table.add_row(str(tipo_apartamento),str(pessoas), str(qtd_dias), str(fc(diaria, 'BRL', locale='pt_BR')))
 #             console.print(table)
             
 #         else:
 #             continue
-
-#         continuar = str(input('Deseja continuar? (s/n)? ')).upper()
-#         if (continuar == 'S'):
-#             # os.system('cls')
-#             continue
-#         elif (continuar == 'N'):
-#             break
+#         try:
+#             continuar = str(input('Deseja continuar? (s/n)? ')).upper()
+#             if (continuar == 'S' or continuar == 's'):
+#                 # os.system('cls')
+#                 continue
+#             elif (continuar == 'N' or continuar == 'n'):
+#                 break
+#         except ValueError as error:
+#             print('Dado inválido inserido!')
+#             print('Tente novamente!')
+        
 
 #     except ValueError as error:
 #         os.system('cls')
-#         print('Erro no Tipo de dado inserido')
-#         print('tente denovo!')
-#         print(error)
+#         print(colored('Erro no Tipo de dado inserido','red'))
+#         print(colored('tente novamente!','red'))
+#         print(colored(error, 'yellow'))
 
