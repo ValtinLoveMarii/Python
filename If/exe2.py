@@ -221,9 +221,31 @@
 # ██      ██   ██ ██      ██   ██ ██      ██   ██ ██   ██    ██    
 #  ██████ ██   ██ ███████ ██   ██ ██      ██   ██ ██   ██    ██                                                                
 # """
+
+
 # print(colored(titulo,'blue'))
 # while True:
 #     try:
+#         console2 = Console()
+#         # Exemplo de texto colorido e estilizado
+
+#         console2.print("Detalhes dos preços", style="bold blue")
+
+#         # Criando uma tabela
+#         table2 = Table(title="")
+#         table2.add_column("Quantidade de pessoas", justify="center", style="blue")
+#         table2.add_column("Apartamento 1 (MoraSol)", justify="center", style="blue")
+#         table2.add_column("Apartamento 2 (Diamond)", justify="center", style="blue")
+
+#         table2.add_row('\n1', '\n20,00', '\n25,00')
+#         table2.add_row('\n2', '\n28,00', '\n34,00')
+#         table2.add_row('\n3', '\n35,00', '\n42,00')
+#         table2.add_row('\n4', '\n42,00', '\n50,00')
+#         table2.add_row('\n5', '\n48,00', '\n57,00')
+#         table2.add_row('\n6', '\n53,00', '\n63,00')
+#         console2.print(table2)
+        
+        
 #         pessoas = int(input('Quantas pessoas ficaram hospedadas? '))
 #         tipo_apartamento = int(input('Qual o tipo do partamento (1/2)? '))
 #         qtd_dias = int(input('Quantos dia vocês vão ficar? '))
@@ -304,4 +326,67 @@
 #         print(colored('Erro no Tipo de dado inserido','red'))
 #         print(colored('tente novamente!','red'))
 #         print(colored(error, 'yellow'))
+
+# os.system('cls')
+
+
+# while True:
+#     try:
+#         console3 = Console()
+#         console3.print("Detalhes dos tipos de pagamento", style="bold blue")
+
+#         # Criando uma tabela
+#         table3 = Table(title="")
+#         table3.add_column('Tipo de Pagamento',  style="blue", justify='center')
+#         table3.add_column('Porcentagem de desconto',  style="blue", justify='center')
+
+#         table3.add_row('Pix', '5%')
+#         table3.add_row('Dinheiro', '10%')
+#         table3.add_row('Boleto', '1%')
+#         table3.add_row('Cartão', '0%')
+#         console3.print(table3)
+#         pagamento = str(input('Qual o tipo de pagamento: ')).lower()
+        
+
+#         # print(pagamento)
+#         if(pagamento == 'pix'):
+#             porcentagem = (5/100) * diaria
+#             valor_final = diaria - porcentagem
+#             os.system('cls')
+#             print(colored(f'O valor inicial era de {fc(diaria, 'BRL', locale='pt_BR')} e com o desconto de 5% ficou em {fc(valor_final, 'BRL', locale='pt_BR')}', 'green'))
+#             break
+#         elif(pagamento == 'dinheiro'):
+#             porcentagem = (10/100) * diaria
+#             valor_final = diaria - porcentagem
+#             os.system('cls')
+#             print(colored(f'O valor inicial era de {fc(diaria, 'BRL', locale='pt_BR')} e com o desconto de 10% ficou em {fc(valor_final, 'BRL', locale='pt_BR')}', 'green'))
+#             # print('Dindin')
+#             break
+#         elif(pagamento == 'boleto'):
+#             porcentagem = (1/100) * diaria
+#             valor_final = diaria - porcentagem
+#             os.system('cls')
+#             print(colored(f'O valor inicial era de {fc(diaria, 'BRL', locale='pt_BR')} e com o desconto de 1% ficou em {fc(valor_final, 'BRL', locale='pt_BR')}', 'green'))
+#             # print('boleto')
+#             break
+#         elif (pagamento == 'cartão'):
+#             os.system('cls')
+#             print(colored('Você não tem direito a desconto!', 'green'))
+#             # print('Cartão')
+#             break
+#         else:
+#             os.system('cls')
+#             print(colored('Opção não existe! ','red'))
+#             continue
+#     except ValueError as error:
+#         print('Deu erro!')
+
+# print(colored('''
+# ██   ██  ██████  ███████ ██████  ███████ ██████   █████   ██████  ███████ ███    ███     ███████ ██ ███    ██  █████  ██      ██ ███████  █████  ██████   █████  ██ 
+# ██   ██ ██    ██ ██      ██   ██ ██      ██   ██ ██   ██ ██       ██      ████  ████     ██      ██ ████   ██ ██   ██ ██      ██    ███  ██   ██ ██   ██ ██   ██ ██ 
+# ███████ ██    ██ ███████ ██████  █████   ██   ██ ███████ ██   ███ █████   ██ ████ ██     █████   ██ ██ ██  ██ ███████ ██      ██   ███   ███████ ██   ██ ███████ ██ 
+# ██   ██ ██    ██      ██ ██      ██      ██   ██ ██   ██ ██    ██ ██      ██  ██  ██     ██      ██ ██  ██ ██ ██   ██ ██      ██  ███    ██   ██ ██   ██ ██   ██    
+# ██   ██  ██████  ███████ ██      ███████ ██████  ██   ██  ██████  ███████ ██      ██     ██      ██ ██   ████ ██   ██ ███████ ██ ███████ ██   ██ ██████  ██   ██ ██ 
+                                                                                                                                                                  
+# ''', 'blue'))
 
