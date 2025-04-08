@@ -1,3 +1,3 @@
 # Python
- Repositorio para aula e exercicios sobre python
+ Repositorio para aula e exercicios sobre **PYTHON**
  
