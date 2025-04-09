@@ -105,4 +105,17 @@
 # print(globals())
 
 
-#Ex9 - 
+# #EX9 - Você deve criar uma tupla contendo objetos mutáveis, como listas ou dicionários. Implemente uma função que altere o conteúdo do objeto mutável na tupla e explique por que é possível.
+# tupla = []
+# c = 0
+# for i in range(2):
+#     tupla.append(list())
+# for x in tupla:
+#     # print(x)
+#     print(f'Lista {c+1}')
+#     for l in range(1, 3):
+#         n = int(input('Numero: '))
+#         x.append(n)
+#     c = c + 1
+# tupla = tuple(tupla)
+# print(tupla)
