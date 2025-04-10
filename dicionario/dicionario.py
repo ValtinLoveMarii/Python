@@ -28,3 +28,16 @@ dicio = {"chave":"Valor 1", "chave2":"valor 2"}
 #     print(i)
 #     l.append(i)
 # print(l)
+
+#CRIAR DICIONÁRIOS DENTRO DE OUTRO
+# dicio = {
+#     "dic1":{
+#         "nome":"sasuke",
+#         "idade":17
+#     },
+#     'dic2':{
+#         'nome':'naruto',
+#         'idade':18
+#     }
+# }
+# print(dicio)
