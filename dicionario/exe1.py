@@ -52,21 +52,45 @@
 # print(dic)
 
 #EX6 - Crie um dicionário com nomes de alunos e suas notas. Depois, calcule e imprima a média das notas.
-import os
-aluno = {}
-media_aluno = {}
-c = 0
-for i in range(2):
-    nome = str(input('Digite o nome do aluno: '))
-    aluno.update({nome: []})
+# import os
+# aluno = {}
+# media_aluno = {}
+# c = 0
+# for i in range(2):
+#     nome = str(input('Digite o nome do aluno: '))
+#     aluno.update({nome: []})
 
-for x in aluno.values():
-    for l in range(2):
-        os.system('cls')
-        n = float(input(f'Digite a nota do aluno: '))
-        x.append(n)
-    nota_final = sum(x) / len(x)
-    media_aluno.update({f"media-{c}":nota_final})
-    c = c + 1
-print(aluno)
-print(media_aluno)
+# for x in aluno.values():
+#     for l in range(2):
+#         os.system('cls')
+#         n = float(input(f'Digite a nota do aluno: '))
+#         x.append(n)
+#     nota_final = sum(x) / len(x)
+#     media_aluno.update({f"media-{c}":nota_final})
+#     c = c + 1
+# print(aluno)
+# print(media_aluno)
+
+
+#EX7 - Dado um dicionário com pares de chave-valor, crie uma função que inverta as chaves e valores.
+# dici = {'a': 1, 'b': 2, 'c': 3}
+# dici2 = {}
+# l = []
+# l2 = []
+# for i in dici:
+#     # print(i)
+#     a = i
+#     b = dici[i]
+#     l.append(a)
+#     l2.append(b)
+# for x in l2:
+#     # print(x)
+#     dici2.update({x:None})
+# k = 1
+# for m in dici.keys():
+#     print(m)
+#     print(k)
+#     dici2.update({k:m})
+#     k = k + 1
+# print(dici2)
+
