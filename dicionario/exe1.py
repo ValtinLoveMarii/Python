@@ -94,3 +94,38 @@
 #     k = k + 1
 # print(dici2)
 
+#EX8 - Escreva uma função que recebe uma lista de palavras e retorna um dicionário com a contagem de cada palavra na lista.
+# dic = {}
+# lista =[]
+# for i in range(7):
+#     n = str(input('Digite algo: '))
+#     lista.append(n)
+# for m in lista:
+#     dic.update({m:None})
+# # print(dic)
+# for z in dic:
+#     cont = lista.count(z)
+#     print(cont)
+#     dic.update({z:cont})
+# print(dic)
+
+#EX9 - Escreva uma função que mescla dois dicionários, onde as chaves iguais devem somar os valores.
+# dic = {}
+# c = 0
+# for i in range(2):
+#     s = str(input('Digite a chave: '))
+#     n = int(input('Digite um valor: '))
+#     print("-"*30)
+#     dic.update({s:n})
+# dic2 = {'a':230, 'b':293, 'c':122}
+# cont = dic2.keys()
+# cont = list(cont)
+# for m in dic.keys():
+#     if (m == cont[c]):
+#         dic.update({m:dic[m] + dic2[m]})
+#         c = c + 1
+#         print('Entrou')
+#     else:
+#         print('Nao entrou')
+# print(dic)
+
