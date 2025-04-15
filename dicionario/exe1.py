@@ -129,3 +129,61 @@
 #         print('Nao entrou')
 # print(dic)
 
+#EX10 - CRIAR CONTAGEM DE DICIONARIO
+# categorias = {
+#     "fruta" : ["maça", "banana"],
+#     "legume" : ["alface"]
+# }
+# dic = {}
+# for i in categorias:
+#     a = len(categorias[i])
+#     dic.update({i:a})
+# print(dic)
+
+#EX11 - Dada uma lista de nomes, crie um dicionário em que o nome é a chave e o valor é o índice dele na lista.
+# lista = ["Ana", "Bruno", "Carlos", "Diana", "Saiko", "Zumbi"]
+# dic = {}
+# c = 0
+# for x in lista:
+#     dic.update({x:c})
+#     c = c + 1
+# print(dic)
+
+#EX12 - Dado um dicionário de produtos e preços, e um nome de produto digitado pelo usuário, verifique se o produto existe no dicionário.
+# produtos = {
+#     "arroz":10,
+#     "carne":20,
+#     "pao":0.50,
+#     "leite":2
+# }
+# while True:
+#     per = str(input('Digite o produto: '))
+#     if per in produtos:
+#         print(f'O preço do {per} é {produtos[per]}')
+#         break
+#     else:
+#         print('Produto não encontrado!')
+#         continue
+
+#EX13 - Aumente em 10% o valor de todos os produtos.
+# precos = {"arroz": 10, "feijão": 8, "leite": 5}
+# for i in precos:
+#     a = precos[i]
+#     per = (10/100) * a
+#     conta = a + per
+#     precos[i] = conta
+# print(precos)
+
+#EX14 - Dada uma lista de tuplas com (nome, idade), agrupe os nomes por idade em um dicionário.
+# dados = [("Ana", 25), ("Bruno", 30), ("Carlos", 25), ("Diana", 30)]
+# dic = {}
+# for nome, idade in dados:
+#     if idade in dic:
+#         dic[idade].append(nome)
+#     else:
+#         dic[idade] = [nome]
+# print(dic)
+
+
+
+
