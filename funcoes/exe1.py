@@ -110,4 +110,53 @@ def functionUpdateVar():
     return a
 # res = functionUpdateVar()
 # print(res)
-            
+
+# EX11 - SOMAR COM PARÂMETROS
+def function(a, b):
+    soma = a + b
+    return soma
+a = int(input('Numero: '))
+b = int(input('Numero: '))
+res = function(a,b)
+print(res)
+
+#EX11 - Pedra, Papel, Tesoura
+import random as rd
+def my_choice(resp):
+    return resp
+my_resp = str(input('Pedra, Papel ou Tesoura: ')).lower()
+resp_final_me = my_choice(my_resp)
+
+def choice_machine():
+    list_machine = ['pedra', 'papel', 'tesoura']
+    resp_machine = rd.choice(list_machine)
+    return resp_machine
+
+machine_resp_final = choice_machine()
+# print(machine_resp_final)
+def verify_winner(my_resp, machine_resp_final):
+    if my_resp == "papel" and machine_resp_final == 'papel':
+        return 'Empate'
+    elif my_resp == 'papel' and machine_resp_final == 'tesoura':
+        return 'Ela ganhou'
+    elif my_resp == 'papel' and machine_resp_final == 'pedra':
+        return 'Eu Ganhei'
+    
+    # -----------------------------------------------------
+    if my_resp == "pedra" and machine_resp_final == 'pedra':
+        return 'Empate'
+    elif my_resp == 'pedra' and machine_resp_final == 'tesoura':
+        return 'Ganhei ganhou'
+    elif my_resp == 'pedra' and machine_resp_final == 'papel':
+        return 'Ela ganhou'
+    
+    #---------------------------------------------------
+    if my_resp == "tesoura" and machine_resp_final == 'tesoura':
+        return 'Empate'
+    elif my_resp == 'tesoura' and machine_resp_final == 'pedra':
+        return 'Ela ganhou'
+    elif my_resp == 'tesoura' and machine_resp_final == 'papel':
+        return 'Eu Ganhei'
+    
+resp_final_game = verify_winner(my_resp, machine_resp_final)
+print(resp_final_game)

@@ -27,3 +27,16 @@ def functionPOP():
     return lista
 res = functionPOP()
 print(res) 
+
+
+def creat_data():
+    l = {"Produto":'Mouse00991', 'Preco':90}
+    return l
+def update_values(data):
+    name_update = data['Produto']
+    name_update = name_update[0:5]
+    data['Produto'] = name_update
+    return data
+datas_ini = creat_data()
+res_final = update_values(datas_ini)
+print(f'Planilha formatada! {res_final}')
