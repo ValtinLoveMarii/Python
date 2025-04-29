@@ -160,3 +160,85 @@ def verify_winner(my_resp, machine_resp_final):
     
 resp_final_game = verify_winner(my_resp, machine_resp_final)
 print(resp_final_game)
+
+#EX12 - PEDRA,PAPEL e TESOURA atualizado
+import random
+import os
+l = ['pedra','papel','tesoura']
+cont_me = 0
+cont_machine = 0
+while True:
+    def my_choice():
+        my_resp = str(input('Pedra, Papel ou Tesoura: ')).lower()
+        return my_resp
+    def machine_choice():
+        choice_resp = random.choice(l)
+        return choice_resp
+    def verify_winner(resp_me, resp_machine):
+        if resp_me == 'tesoura' and resp_machine == 'tesoura':
+            print('Empate!')
+            result = 0
+            return result
+        elif resp_me == 'tesoura' and resp_machine == 'papel':
+            print('Ganhei!')
+            result = 1
+            return result
+        elif resp_me == 'tesoura' and resp_machine == 'pedra':
+            print('Perdi!')
+            result = 2
+            return result
+        # ------------------------------------------------------------------------
+        elif resp_me == 'papel' and resp_machine == 'tesoura':
+            print('Perdi!')
+            result = 2
+            return result
+        elif resp_me == 'papel' and resp_machine == 'papel':
+            print('Empate!')
+            result = 0
+            return result
+        elif resp_me == 'papel' and resp_machine == 'pedra':
+            print('Ganhei!')
+            result = 1
+            return result
+        # -------------------------------------------------------------------------
+        elif resp_me == 'pedra' and resp_machine == 'tesoura':
+            print('Ganhei!')
+            result = 1
+            return result
+        elif resp_me == 'pedra' and resp_machine == 'papel':
+            print('Perdi!')
+            result = 2
+            return result
+        elif resp_me == 'pedra' and resp_machine == 'pedra':
+            print('Empate!')
+            result = 0
+            return result
+        else:
+            print('Não existe essa opção!')
+            print('Tente Novamente!')
+    resp_me = my_choice()
+    resp_machine = machine_choice()
+    result = verify_winner(resp_me, resp_machine)
+    if result == 1:
+        cont_me = cont_me + 1
+    elif result == 2:
+        cont_machine = cont_machine + 1
+    elif result == 0:
+        cont_machine = cont_machine + 0
+        cont_me = cont_me + 0
+
+    os.system('cls')
+    print('RESULTADO!')
+    print(f'Minha escolha {resp_me.upper()} escolha da máquina {resp_machine.upper()}')
+    print(f'Número de vitorias minhas: {cont_me}')
+    print(f'Número de vitorias da máquina: {cont_machine}')
+
+    try:
+        continue_resp  = str(input('Deseja continuar? (s/n): ')).lower()
+        if continue_resp == 's':
+            continue
+        elif continue_resp == 'n':
+            break
+    except ValueError as error:
+        print(f'VAlOR INVÁLIDO!')
+        print('TENTE NOVAMENTE')
