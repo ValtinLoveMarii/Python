@@ -40,3 +40,23 @@ def update_values(data):
 datas_ini = creat_data()
 res_final = update_values(datas_ini)
 print(f'Planilha formatada! {res_final}')
+
+def function(nome, idade):
+    print(nome)
+    print(idade)
+function(idade=19, nome='pedro')    
+
+def function(x=None, z = None):
+    if x != None:
+        print(x, z)
+    else:
+        print('Valores não passados passa ai')
+function(z='narutinjo', x='elliee')
+
+def function(nome, *args):
+    print(nome)
+    print(args)
+function('naruto',[1,2,'balde'])
+def function(**kwags):
+    print(kwags)
+function(nome='aluno1', nota=7)

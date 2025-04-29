@@ -1,4 +1,4 @@
-#Exercícios de Função
+# #Exercícios de Função
 #EX1 - Crie uma função que receba dois números e retorne a soma deles.
 def function():
     a = 10
@@ -242,3 +242,54 @@ while True:
     except ValueError as error:
         print(f'VAlOR INVÁLIDO!')
         print('TENTE NOVAMENTE')
+
+# EX13 - Crie uma função com parâmetros opcionais que retorne uma saudação personalizada (ex: se não passar nome, dizer "Olá, visitante!").
+def func(nome=None):
+    if nome != None:
+        print(f'Olá {nome}')
+    else:
+        print('Olá Visitante!')
+func(nome='Ellie Williams')
+
+# EX14 - Crie uma função que recebe outra função como argumento e a executa.
+def function(func):
+    return func
+def mult(a,b):
+    mul = a * b
+    return mul
+res_mul = mult(9,3)
+res_func = function(res_mul)
+print(res_func)
+
+#EX15 - Crie uma função que, dada uma lista de números, retorne apenas os números primos.
+import math
+lista = [3,5,9,1,3,12,12312313,13]
+primo = []
+div=[]
+c = 0
+def func_prim(lista):
+    primo = []
+    for i in lista:
+        if i <= 1:
+            primo.append('N PRIMO')
+        else:
+            if i == 2:
+                print('PRIMO')
+                primo.append('PRIMO')
+            else:
+                div = []
+                for x in range(1, i+1):
+                    if i%x == 0:
+                        div.append(x)
+                    else:
+                        continue
+                c = len(div)
+                if c == 2:
+                    primo.append('PRIMO')
+                else:
+                    continue
+    return primo
+
+    
+res = func_prim(lista)
+print(res)
