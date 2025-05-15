@@ -42,3 +42,17 @@
 #     print(resposta)
 # else:
 #     print('N tem essa ')
+
+#EX8 - Usar módulos dentro de pasta(pacotes)
+# from pacote_modulo import func
+# res = func.somar(1,9)
+# print(res)
+
+#EX9 - Usar módulos dentro de pasta com outra pasta dentro (sub-pacotes)
+# from pacote_modulo.mini_pacote import mini_func
+# numero = int(input('Numero: '))
+# res = mini_func.imprimir(f'Teclado gamer a {numero} reais corre que ainda tem!')
+# print(res)
+
+#EX10 - Sistema de login com módulos: Crie um módulo usuarios.py que guarda e valida usuários.Crie um script principal que usa esse módulo para logar ou registrar novos usuários.
+from modulos import login
