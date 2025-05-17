@@ -1,3 +1,6 @@
+#DUNDER MAIN
+
+
 #EX1 - Importe o módulo math e use-o para calcular a raiz quadrada de um número.
 # import math
 # print(math.sqrt(9))
@@ -54,5 +57,10 @@
 # res = mini_func.imprimir(f'Teclado gamer a {numero} reais corre que ainda tem!')
 # print(res)
 
-#EX10 - Sistema de login com módulos: Crie um módulo usuarios.py que guarda e valida usuários.Crie um script principal que usa esse módulo para logar ou registrar novos usuários.
-from modulos import login
+#EX10 - Criar um arquivo calculadora e usar o dunder main
+# from calculadora import somar, multi
+# somar(10, 6)
+# multi(12, 2)
+
+#EX11 - Sistema de login com módulos: Crie um módulo usuarios.py que guarda e valida usuários.Crie um script principal que usa esse módulo para logar ou registrar novos usuários.
+from usuario import login
