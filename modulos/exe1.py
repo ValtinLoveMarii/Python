@@ -63,4 +63,30 @@
 # multi(12, 2)
 
 #EX11 - Sistema de login com módulos: Crie um módulo usuarios.py que guarda e valida usuários.Crie um script principal que usa esse módulo para logar ou registrar novos usuários.
-from usuario import login
+from usuario import login, cadastrar
+users = {}
+while True:
+    if len(users) == 0:
+        print('Não existe seu user no noso sistema, por favor cadastre-se!')
+        cadastrar(users)
+    else:
+        resp = str(input('Logar ou Cadastrar: ')).lower()
+        if resp == 'logar':
+            res_name, res_pass = login()
+            if res_name in users and res_pass == users[res_name]:
+                print('User correto!')
+                break
+            else:
+                print('Tente Novamente user incorreto!')
+        elif resp == 'cadastrar':
+            cadastrar(users)
+            continue
+        else:
+            break
+print(users)
+        
+# if res_name in users and res_pass in users:
+#     print('usuário correto!')
+# else:
+#     users.update({res_name:res_pass})
+# print(users)
