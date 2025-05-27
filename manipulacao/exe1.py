@@ -10,10 +10,10 @@ ler = open('texto.txt', 'r')
 
 #EX3 - Adicionar conteúdo em um arquivo existente
 with open('texto.txt','a') as f:
-    # f.write('\nSasuke tbm bem legal')
+    f.write('\nSasuke tbm bem legal')
 
 #EX4 - Contar linhas de um arquivo
-with open('texto.txt', 'r') as  f:
+with open('texto.txt', 'r') as f:
     linhas = f.readlines()
 # print(len(linhas))
 
@@ -49,7 +49,7 @@ from os import rename
 # rename('texto.txt', 'backup.txt')
 
 #EX10 - Criar e remover diretórios
-import os
+# import os
 os.mkdir('pasta')
 os.removedirs('pasta')
 
@@ -85,7 +85,7 @@ with open('dados.txt', 'r') as f:
 #EX14 - Crie um programa que conte quantas linhas existem em um arquivo texto
 with open('dados.txt', 'r') as f:
    conteudo = f.readlines()
-  print(len(conteudo))
+print(len(conteudo))
 
 #EX15 - Leia um arquivo e grave em outro apenas as linhas que contêm uma palavra específica
 with open('dados.txt', 'r') as f:

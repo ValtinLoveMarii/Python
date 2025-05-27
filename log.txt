@@ -1,0 +1,9 @@
+modulos
+ ['pacote_modulo']
+ ['exe1.py', 'modulos.py', 'usuario.py'] 
+modulos\pacote_modulo
+ ['mini_pacote']
+ ['func.py'] 
+modulos\pacote_modulo\mini_pacote
+ []
+ ['mini_func.py'] 
