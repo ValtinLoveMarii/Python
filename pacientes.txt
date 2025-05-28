@@ -1,0 +1,4 @@
+Paciente: Valtin Toledo - E-mail: valti@gmail.com - Idade: 18 - GRUPO DE RISCO: NAO
+Paciente: Valtin Toledo Martins Rezende - E-mail: valtin_rezende@gmail.com - Idade: 18 - GRUPO DE RISCO: NAO
+Paciente: Danilo Oliveira - E-mail: dandan@gmail.com - Idade: 75 - GRUPO DE RISCO: SIM
+Paciente: Pedrinho Gomes - E-mail: pedrinhobloblox@gmail.com - Idade: 10 - GRUPO DE RISCO: NAO

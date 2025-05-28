@@ -1,4 +1,4 @@
-# ##EXERCÍCIOS DE MANIPULACAO DE ARQUIVOS
+# # ##EXERCÍCIOS DE MANIPULACAO DE ARQUIVOS
 import os
 from datetime import date
 #EX1 - Use os.path para verificar se um arquivo ou pasta existe
@@ -175,3 +175,56 @@ for p in sub_pasta:
         os.mkdir(f'bkcup-dia-2025-05-27/{sub_pasta_pacote_modulo}/{p}')
         ultima_pasta = os.listdir(f'modulos/{sub_pasta_pacote_modulo}/{p}')
         os.rename(f'modulos/{sub_pasta_pacote_modulo}/{p}/{ultima_pasta[0]}', f'bkcup-dia-2025-05-27/{sub_pasta_pacote_modulo}/{p}/{ultima_pasta[0]}')
+
+
+#EX12 - Criar um módulo em python capaz de registrar dados de pacientes
+
+data_atual = date.today()
+ano_atual = data_atual.year
+
+def paciente(ano_atual):
+    print('-------------------------------------')
+    nome  = input('Digite seu nome completo: ')
+    email = input('Digite seu email: ')
+    data_nascimento = str(input('Ano em que nasceu: '))
+    print('-------------------------------------')
+    os.system('cls')
+    data_nascimento = int(data_nascimento)
+    idade = ano_atual - data_nascimento
+    if idade >= 65:
+        if os.path.exists('pacientes.txt') == True:
+            with open('pacientes.txt','a') as a:
+                a.write(f'Paciente: {nome} - E-mail: {email} - Idade: {idade} - GRUPO DE RISCO: SIM\n')
+        else:
+            with open('pacientes.txt', 'w', encoding='UTF-8') as w:
+                w.write(f'Paciente: {nome} - E-mail: {email} - Idad: {idade} - GRUPO DE RISCO: SIM\n')
+    else:
+        if os.path.exists('pacientes.txt') == True:
+            with open('pacientes.txt','a') as a:
+                a.write(f'Paciente: {nome} - E-mail: {email} - Idade: {idade} - GRUPO DE RISCO: NAO\n')
+        else:
+            with open('pacientes.txt', 'w', encoding='UTF-8') as w:
+                w.write(f'Paciente: {nome} - E-mail: {email} - Idade: {idade} - GRUPO DE RISCO: NAO\n')
+if __name__ == '__main__':
+    print('Código RODANDO DIRETO')
+    print('FASE TESTE!')
+    while True:
+        paciente(ano_atual=ano_atual)
+        print('CLÍNICA HOSPITALAR RAPHAEL AFONSO NUNES')
+        print('Dados coletados com sucesso!')
+        with open('pacientes.txt', 'r') as r:
+            print(r.read())
+        input('Pressione em enter para continuar...')
+        os.system('cls')
+        continuar = input('Deseja cadastrar um novo paciente? (s/n)').lower()
+        try:
+            if continuar == 's':
+                continue
+            elif continuar == 'n':
+                os.system('cls')
+                print('FIM DO SISTEMA')
+                input('PRESSIONE ENTER PARA SAIR...')
+                break
+        except ValueError:
+            print('POR FAVOR DIGITE S OU N')
+            input('PRESSIONE ENTER PARA VOLTAR A SUA ESCOLHA...')
