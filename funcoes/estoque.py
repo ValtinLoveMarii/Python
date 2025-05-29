@@ -92,42 +92,74 @@
 #         input("\nPressione Enter para continuar...")
 
 
-#TESTE DE SISTEMA
 
+
+
+
+
+#TESTE DE SISTEMA
 import os
 dados_produtos = {}
+tamanho_linha = 100
+print(f'DADOS PRODUTOS {dados_produtos}')
 
-# def adiconar_produtos(dados_produtos):
-#     nome_prod = input('Digite o nome do produto: ').lower()
-#     quantidade = int(input('Digite a quantidade do produto em estoque: '))
-#     preco = float(input('Digite o preço por unidade: '))
-#     dados_produtos.update({f'{nome_prod}': [quantidade, preco]})
-#     if os.path.exists('dados_estoque.txt') == True:
-#         with open('dados_estoque.txt', 'a', encoding='UTF-8') as a:
-#             a.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
-#     else:
-#         with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
-#             w.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
-# adiconar_produtos(dados_produtos=dados_produtos)
+def adiconar_produtos(dados_produtos):
+    nome_prod = input('Digite o nome do produto: ').lower()
+    quantidade = int(input('Digite a quantidade do produto em estoque: '))
+    preco = float(input('Digite o preço por unidade: '))
+    
+    dados_produtos.update({f'{nome_prod}': [quantidade, preco]})
+    if os.path.exists('dados_estoque.txt') == True:
+        with open('dados_estoque.txt', 'a', encoding='UTF-8') as a:
+            a.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
+    else:
+        with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
+            w.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
+adiconar_produtos(dados_produtos=dados_produtos)
 
-# def remover_produtos(dados_produtos):
-#     remover = str(input('Qual produto deseja remover do estoque: ')).lower()
-#     if remover not in dados_produtos:
-#         print('Valor Inválido, o item náo existe no estoque!')
-#     elif len(dados_produtos) == 0:
-#         print('Estoque ainda não possuí produtos, por favor adicione!')
-#     else:
-#         dados_produtos.pop(remover)
-#         with open('dados_estoque.txt', 'r') as r:
-#             conteudo = r.readlines()
-#         print(conteudo)
+def remover_produtos(dados_produtos):
+    remover = str(input('Qual produto deseja remover do estoque: ')).lower()
+    if remover not in dados_produtos:
+        print('Valor Inválido, o item náo existe no estoque!')
+    elif len(dados_produtos) == 0:
+        print('Estoque ainda não possuí produtos, por favor adicione!')
+    else:
+        dados_produtos.pop(remover)
+        with open('dados_estoque.txt', 'r') as r:
+            lista = r.readlines()
+            for i, valor in enumerate(lista):
+                if remover in valor:
+                    del lista[i]
+                    with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
+                        w.writelines(lista)
 
-# remover_produtos(dados_produtos=dados_produtos)
-# print(dados_produtos)
+remover_produtos(dados_produtos=dados_produtos)
 
-lista = []
-with open('dados_estoque.txt', 'r') as r:
-    lista = r.readlines()
-    item_excluir = lista.index('pp')
-    print(lista)
-    print(item_excluir)
+def atualizar_produtos(dados_produtos):
+    produto_atualizar = str(input('Qual produto deseja atualizar: '))
+    
+    if produto_atualizar not in dados_produtos:
+        print('Produto Inválido ou inexistente!')
+    elif len(dados_produtos) == 0:
+        print('Estoque ainda não possuí produtos, por favor adicione!')
+    else:
+        nova_quantidade = int(input(f'Digite a nova quantidade disponível do produto {produto_atualizar}: '))
+        novo_preco = int(input(f'Digite o novo valor de cada produto: '))
+        dados_produtos.update({f'{produto_atualizar}':[nova_quantidade, novo_preco]})
+        with open('dados_estoque.txt', 'r') as r:
+            lista = r.readlines()
+            for i, valor in enumerate(lista):
+                if produto_atualizar in valor:
+                    lista[i] = f'Nome produto: {produto_atualizar} - Quantidade: {nova_quantidade} - Preço: {novo_preco}\n'
+                    with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
+                        w.writelines(lista) 
+atualizar_produtos(dados_produtos=dados_produtos)
+
+def mostrar_tela(tamanho_linha):
+    with open('dados_estoque.txt', 'r', encoding='UTF-8') as r:
+        print('=' * tamanho_linha)
+        print('PRODUTOS CADASTRADOS NO ESTOQUE'.center(tamanho_linha))
+        print('=' * tamanho_linha)
+        print(r.read())
+mostrar_tela(tamanho_linha=tamanho_linha)
+print(dados_produtos)
