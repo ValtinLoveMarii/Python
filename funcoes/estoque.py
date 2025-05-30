@@ -100,23 +100,46 @@
 #TESTE DE SISTEMA
 import os
 dados_produtos = {}
-tamanho_linha = 100
-print(f'DADOS PRODUTOS {dados_produtos}')
+tamanho_linha = 60
 
+#FUNÇÃO DE VERIFICAR SE O DIC E O TXT EXISTE A SINCRONIZAR OS DADOS
+def carregar_dados_arquivo():
+    dados = {}
+    if os.path.exists('dados_estoque.txt'):
+        with open('dados_estoque.txt', 'r', encoding='utf-8') as f:
+            for linha in f:
+                linha = linha.strip()
+                if linha:
+                    try:
+                        partes = linha.split(' - ')
+                        nome = partes[0].split(':')[1].strip().lower() 
+                        qtd = int(partes[1].split(':')[1].strip())      
+                        preco = float(partes[2].split(':')[1].strip()) 
+                        dados[nome] = [qtd, preco]
+                    except Exception as e:
+                        print(f"Erro ao processar linha: {linha}\nDetalhes: {e}")
+    elif os.path.exists('dados_estoque.txt') == False:
+        print('Estoque ainda não criado! Por favor crie-o!')
+        
+    return dados
+
+#FUNÇÃO DE ADICINAR PRODUTOS
 def adiconar_produtos(dados_produtos):
     nome_prod = input('Digite o nome do produto: ').lower()
     quantidade = int(input('Digite a quantidade do produto em estoque: '))
     preco = float(input('Digite o preço por unidade: '))
     
     dados_produtos.update({f'{nome_prod}': [quantidade, preco]})
+    print(f'Produto "{nome_prod}" adicionado/atualizado com sucesso!')
     if os.path.exists('dados_estoque.txt') == True:
         with open('dados_estoque.txt', 'a', encoding='UTF-8') as a:
             a.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
     else:
         with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
             w.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
-adiconar_produtos(dados_produtos=dados_produtos)
 
+
+#FUNÇÃO DE REMOVER PRODUTOS
 def remover_produtos(dados_produtos):
     remover = str(input('Qual produto deseja remover do estoque: ')).lower()
     if remover not in dados_produtos:
@@ -132,9 +155,11 @@ def remover_produtos(dados_produtos):
                     del lista[i]
                     with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
                         w.writelines(lista)
+                    print(f'Produto "{remover}" removido com sucesso.')
 
-remover_produtos(dados_produtos=dados_produtos)
 
+
+#FUNÇÃO DE ATUALIZAR PRODUTOS
 def atualizar_produtos(dados_produtos):
     produto_atualizar = str(input('Qual produto deseja atualizar: '))
     
@@ -146,20 +171,73 @@ def atualizar_produtos(dados_produtos):
         nova_quantidade = int(input(f'Digite a nova quantidade disponível do produto {produto_atualizar}: '))
         novo_preco = int(input(f'Digite o novo valor de cada produto: '))
         dados_produtos.update({f'{produto_atualizar}':[nova_quantidade, novo_preco]})
-        with open('dados_estoque.txt', 'r') as r:
+        with open('dados_estoque.txt', 'r', encoding='UTF-8') as r:
             lista = r.readlines()
             for i, valor in enumerate(lista):
                 if produto_atualizar in valor:
                     lista[i] = f'Nome produto: {produto_atualizar} - Quantidade: {nova_quantidade} - Preço: {novo_preco}\n'
                     with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
                         w.writelines(lista) 
-atualizar_produtos(dados_produtos=dados_produtos)
 
+
+#FUNÇÃO DE MOSTRAR NA TELA
 def mostrar_tela(tamanho_linha):
     with open('dados_estoque.txt', 'r', encoding='UTF-8') as r:
         print('=' * tamanho_linha)
         print('PRODUTOS CADASTRADOS NO ESTOQUE'.center(tamanho_linha))
         print('=' * tamanho_linha)
         print(r.read())
-mostrar_tela(tamanho_linha=tamanho_linha)
-print(dados_produtos)
+
+while True:
+    print('=' * tamanho_linha)
+    print('SISTEMA DE ESTOQUE DE ITENS'.center(tamanho_linha))
+    print('=' * tamanho_linha)
+    print("""
+    [1] ➤ Adicionar Produto
+    [2] ➤ Remover Produto
+    [3] ➤ Atualizar Produto
+    [4] ➤ Mostrar Produtos
+    [5] ➤ Sair
+    """)
+
+    #VERIFICAR O ARQUIVOS TXT(BASE DE DADOS) E O DIC E SINCRONIZA-LÓ
+    dados_produtos = carregar_dados_arquivo()
+    print(dados_produtos)
+    
+
+    try:
+        escolha_user = str(input('Escolha: '))
+        #ADICIONAR PRODUTO
+        if escolha_user == '1':
+            os.system('cls')
+            adiconar_produtos(dados_produtos=dados_produtos)
+
+        #REMOVER PRODUTO
+        elif escolha_user == '2':
+            os.system('cls')
+            remover_produtos(dados_produtos=dados_produtos)
+
+        #ATUALIZAR PRODUTO
+        elif escolha_user ==  '3':
+            os.system('cls')
+            atualizar_produtos(dados_produtos=dados_produtos)
+        
+        #MOSTRAR PRODUTOS NA TELA
+        elif escolha_user == '4':
+            os.system('cls')
+            mostrar_tela(tamanho_linha=tamanho_linha)
+            input('Pressione Enter para voltar ao menu...')
+
+        #SAIR
+        elif escolha_user == '5':
+            os.system('cls')
+            print('SAINDO....')
+            break
+
+        else:
+            print('Opção inválida. Tente novamente.')
+            input('Pressione Enter para continuar...')
+
+
+    except ValueError as error:
+        print('Valor Inválido Tente Novamente!')
