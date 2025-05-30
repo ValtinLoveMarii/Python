@@ -99,6 +99,7 @@
 
 #TESTE DE SISTEMA
 import os
+import questionary
 dados_produtos = {}
 tamanho_linha = 60
 
@@ -119,66 +120,111 @@ def carregar_dados_arquivo():
                     except Exception as e:
                         print(f"Erro ao processar linha: {linha}\nDetalhes: {e}")
     elif os.path.exists('dados_estoque.txt') == False:
-        print('Estoque ainda não criado! Por favor crie-o!')
+        print('Estoque inexistente. Crie o estoque antes de prosseguir.')
         
     return dados
 
 #FUNÇÃO DE ADICINAR PRODUTOS
 def adiconar_produtos(dados_produtos):
-    nome_prod = input('Digite o nome do produto: ').lower()
-    quantidade = int(input('Digite a quantidade do produto em estoque: '))
-    preco = float(input('Digite o preço por unidade: '))
-    
-    dados_produtos.update({f'{nome_prod}': [quantidade, preco]})
-    print(f'Produto "{nome_prod}" adicionado/atualizado com sucesso!')
-    if os.path.exists('dados_estoque.txt') == True:
-        with open('dados_estoque.txt', 'a', encoding='UTF-8') as a:
-            a.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
-    else:
-        with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
-            w.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
+    try:
+        nome_prod = input('Informe o nome do produto: ').strip().lower()
+        quantidade = int(input('Informe a quantidade disponível em estoque: '))
+        preco = float(input('Informe o preço unitário do produto: '))
 
+        if not nome_prod.strip():
+            print('O nome do produto não pode estar vazio.')
+            
+        elif quantidade < 0 or preco < 0:
+            print('A quantidade e o preço devem ser valores positivos.')
+        
+        elif nome_prod in dados_produtos:
+            print('Item já existente')
+            
+        else:    
+            dados_produtos.update({f'{nome_prod}': [quantidade, preco]})
+            print(f'Produto "{nome_prod}" adicionado/atualizado com sucesso!')
+            if os.path.exists('dados_estoque.txt') == True:
+                with open('dados_estoque.txt', 'a', encoding='UTF-8') as a:
+                    a.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
+            else:
+                with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
+                    w.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
+    except ValueError as error:
+        print(f'Entrada inválida: {error}')
+        print('Por favor, insira os dados corretamente e tente novamente.')
+        input('Pressione Enter para voltar ao menu...')
 
 #FUNÇÃO DE REMOVER PRODUTOS
 def remover_produtos(dados_produtos):
-    remover = str(input('Qual produto deseja remover do estoque: ')).lower()
-    if remover not in dados_produtos:
-        print('Valor Inválido, o item náo existe no estoque!')
-    elif len(dados_produtos) == 0:
-        print('Estoque ainda não possuí produtos, por favor adicione!')
-    else:
-        dados_produtos.pop(remover)
-        with open('dados_estoque.txt', 'r') as r:
-            lista = r.readlines()
-            for i, valor in enumerate(lista):
-                if remover in valor:
-                    del lista[i]
-                    with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
-                        w.writelines(lista)
-                    print(f'Produto "{remover}" removido com sucesso.')
+    try:
+        remover = str(input('Informe o nome do produto que deseja remover do estoque: ')).strip().lower()
+        
+        if not remover.strip():
+            print('O nome do produto não pode estar vazio.')
+            input('Pressione Enter para voltar ao menu...')
+            
+        elif len(dados_produtos) == 0:
+            print('O estoque está vazio. Por favor, adicione produtos antes de tentar remover.')
+            input('Pressione Enter para voltar ao menu...')
+            
+        
+    
+        elif remover not in dados_produtos:
+            print('Produto não encontrado. Verifique o nome informado.')
+            input('Pressione Enter para voltar ao menu...')
+        else:
+            dados_produtos.pop(remover)
+            with open('dados_estoque.txt', 'r') as r:
+                lista = r.readlines()
+                for i, valor in enumerate(lista):
+                    nome_arquivo = valor.split(' - ')[0].split(':')[1].strip().lower()
+                    if nome_arquivo == remover:
+                        del lista[i]
+                        with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
+                            w.writelines(lista)
+                        print(f'Produto "{remover}" removido com sucesso.')
+    except ValueError as error:
+        print(f'Entrada inválida: {error}')
+        print('Por favor, insira os dados corretamente e tente novamente.')
+        input('Pressione Enter para voltar ao menu...')
 
 
 
 #FUNÇÃO DE ATUALIZAR PRODUTOS
 def atualizar_produtos(dados_produtos):
-    produto_atualizar = str(input('Qual produto deseja atualizar: '))
     
-    if produto_atualizar not in dados_produtos:
-        print('Produto Inválido ou inexistente!')
-    elif len(dados_produtos) == 0:
-        print('Estoque ainda não possuí produtos, por favor adicione!')
-    else:
-        nova_quantidade = int(input(f'Digite a nova quantidade disponível do produto {produto_atualizar}: '))
-        novo_preco = int(input(f'Digite o novo valor de cada produto: '))
-        dados_produtos.update({f'{produto_atualizar}':[nova_quantidade, novo_preco]})
-        with open('dados_estoque.txt', 'r', encoding='UTF-8') as r:
-            lista = r.readlines()
-            for i, valor in enumerate(lista):
-                if produto_atualizar in valor:
-                    lista[i] = f'Nome produto: {produto_atualizar} - Quantidade: {nova_quantidade} - Preço: {novo_preco}\n'
-                    with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
-                        w.writelines(lista) 
+    try:
+        produto_atualizar = str(input('Qual produto deseja atualizar: ')).strip().lower()
+        if not produto_atualizar.strip():
+            print('O nome do produto não pode estar vazio.')
+            input('Pressione Enter para voltar ao menu...')
 
+        elif len(dados_produtos) == 0:
+            print('Estoque ainda não possuí produtos, por favor adicione!')
+            input('Pressione Enter para voltar ao menu...')
+
+        elif produto_atualizar.lower() not in dados_produtos:
+            print('Produto inválido ou inexistente!')
+            input('Pressione Enter para voltar ao menu...')
+
+        else:
+            nova_quantidade = int(input(f'Digite a nova quantidade disponível do produto {produto_atualizar}: '))
+            novo_preco = float(input(f'Digite o novo valor de cada produto: '))
+            dados_produtos.update({f'{produto_atualizar}':[nova_quantidade, novo_preco]})
+            with open('dados_estoque.txt', 'r', encoding='UTF-8') as r:
+                lista = r.readlines()
+                for i, valor in enumerate(lista):
+                    nome_arquivo = valor.split(' - ')[0].split(':')[1].strip().lower()
+                    if nome_arquivo == produto_atualizar:
+                        lista[i] = f'Nome produto: {produto_atualizar} - Quantidade: {nova_quantidade} - Preço: {novo_preco}\n'
+                        with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
+                            w.writelines(lista)
+                        print(f'Produto "{produto_atualizar}" atualizado com sucesso.')
+
+    except ValueError as error:
+        print(f'Entrada inválida: {error}')
+        print('Por favor, insira os dados corretamente e tente novamente.')
+        input('Pressione Enter para voltar ao menu...')
 
 #FUNÇÃO DE MOSTRAR NA TELA
 def mostrar_tela(tamanho_linha):
@@ -189,55 +235,52 @@ def mostrar_tela(tamanho_linha):
         print(r.read())
 
 while True:
+    os.system('cls')
     print('=' * tamanho_linha)
     print('SISTEMA DE ESTOQUE DE ITENS'.center(tamanho_linha))
     print('=' * tamanho_linha)
-    print("""
-    [1] ➤ Adicionar Produto
-    [2] ➤ Remover Produto
-    [3] ➤ Atualizar Produto
-    [4] ➤ Mostrar Produtos
-    [5] ➤ Sair
-    """)
-
     #VERIFICAR O ARQUIVOS TXT(BASE DE DADOS) E O DIC E SINCRONIZA-LÓ
     dados_produtos = carregar_dados_arquivo()
-    print(dados_produtos)
-    
-
+    # print(dados_produtos)
     try:
-        escolha_user = str(input('Escolha: '))
+        escolha_user = questionary.select(
+            'Selecione uma opção:',
+            choices=[
+                "Adicionar Produto",
+                "Remover Produto",
+                "Atualizar Produto",
+                "Mostrar Produtos",
+                "Sair"
+            ]
+        ).ask()
         #ADICIONAR PRODUTO
-        if escolha_user == '1':
+        if escolha_user == 'Adicionar Produto':
             os.system('cls')
             adiconar_produtos(dados_produtos=dados_produtos)
 
         #REMOVER PRODUTO
-        elif escolha_user == '2':
+        elif escolha_user == 'Remover Produto':
             os.system('cls')
             remover_produtos(dados_produtos=dados_produtos)
 
         #ATUALIZAR PRODUTO
-        elif escolha_user ==  '3':
+        elif escolha_user ==  'Atualizar Produto':
             os.system('cls')
             atualizar_produtos(dados_produtos=dados_produtos)
         
         #MOSTRAR PRODUTOS NA TELA
-        elif escolha_user == '4':
+        elif escolha_user == 'Mostrar Produtos':
             os.system('cls')
             mostrar_tela(tamanho_linha=tamanho_linha)
             input('Pressione Enter para voltar ao menu...')
 
         #SAIR
-        elif escolha_user == '5':
+        elif escolha_user == 'Sair':
             os.system('cls')
             print('SAINDO....')
             break
 
-        else:
-            print('Opção inválida. Tente novamente.')
-            input('Pressione Enter para continuar...')
-
 
     except ValueError as error:
+        os.system('cls') 
         print('Valor Inválido Tente Novamente!')
