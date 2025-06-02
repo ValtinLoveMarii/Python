@@ -128,18 +128,21 @@ def carregar_dados_arquivo():
 def adiconar_produtos(dados_produtos):
     try:
         nome_prod = input('Informe o nome do produto: ').strip().lower()
+        if not nome_prod:
+            print('O nome do produto não pode estar vazio.')
+            input('Pressione Enter para voltar ao menu...')
+            return
+        if nome_prod in dados_produtos:
+            print('Item já existente')
+            input('Pressione Enter para voltar ao menu...')
+            return
+        
         quantidade = int(input('Informe a quantidade disponível em estoque: '))
         preco = float(input('Informe o preço unitário do produto: '))
-
-        if not nome_prod.strip():
-            print('O nome do produto não pode estar vazio.')
-            
-        elif quantidade < 0 or preco < 0:
+        if quantidade < 0 or preco < 0:
             print('A quantidade e o preço devem ser valores positivos.')
-        
-        elif nome_prod in dados_produtos:
-            print('Item já existente')
-            
+            input('Pressione Enter para voltar ao menu...')
+            return
         else:    
             dados_produtos.update({f'{nome_prod}': [quantidade, preco]})
             print(f'Produto "{nome_prod}" adicionado/atualizado com sucesso!')
@@ -154,24 +157,29 @@ def adiconar_produtos(dados_produtos):
         print('Por favor, insira os dados corretamente e tente novamente.')
         input('Pressione Enter para voltar ao menu...')
 
+
+
+
 #FUNÇÃO DE REMOVER PRODUTOS
 def remover_produtos(dados_produtos):
     try:
         remover = str(input('Informe o nome do produto que deseja remover do estoque: ')).strip().lower()
         
-        if not remover.strip():
+        if not remover:
             print('O nome do produto não pode estar vazio.')
             input('Pressione Enter para voltar ao menu...')
+            return
             
         elif len(dados_produtos) == 0:
             print('O estoque está vazio. Por favor, adicione produtos antes de tentar remover.')
             input('Pressione Enter para voltar ao menu...')
-            
+            return
         
-    
         elif remover not in dados_produtos:
             print('Produto não encontrado. Verifique o nome informado.')
             input('Pressione Enter para voltar ao menu...')
+            return
+        
         else:
             dados_produtos.pop(remover)
             with open('dados_estoque.txt', 'r') as r:
