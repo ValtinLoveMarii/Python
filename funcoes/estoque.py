@@ -101,6 +101,10 @@
 import os
 import questionary
 dados_produtos = {}
+grupo = {
+    'perifericos':['mouse', 'teclado', 'fone', 'mouse pad', 'monitor','suporte'],
+    'pc_pecas':['notebook', 'hd', 'sdd', 'ram', 'cooler', 'fonte', 'placa-mãe','computador', 'gabinete']
+}
 tamanho_linha = 60
 
 #FUNÇÃO DE VERIFICAR SE O DIC E O TXT EXISTE A SINCRONIZAR OS DADOS
@@ -116,7 +120,9 @@ def carregar_dados_arquivo():
                         nome = partes[0].split(':')[1].strip().lower() 
                         qtd = int(partes[1].split(':')[1].strip())      
                         preco = float(partes[2].split(':')[1].strip()) 
-                        dados[nome] = [qtd, preco]
+                        grupo = partes[3].split(':')[1].strip()
+                        dados[nome] = [qtd, preco, grupo]
+                        
                     except Exception as e:
                         print(f"Erro ao processar linha: {linha}\nDetalhes: {e}")
     elif os.path.exists('dados_estoque.txt') == False:
@@ -124,8 +130,11 @@ def carregar_dados_arquivo():
         
     return dados
 
+
+# dados_produtos = carregar_dados_arquivo() -----> PARA TESTE DE DEBUG
+
 #FUNÇÃO DE ADICINAR PRODUTOS
-def adiconar_produtos(dados_produtos):
+def adiconar_produtos(dados_produtos, grupo):
     try:
         nome_prod = input('Informe o nome do produto: ').strip().lower()
         if not nome_prod:
@@ -144,23 +153,41 @@ def adiconar_produtos(dados_produtos):
             input('Pressione Enter para voltar ao menu...')
             return
         else:    
-            dados_produtos.update({f'{nome_prod}': [quantidade, preco]})
             print(f'Produto "{nome_prod}" adicionado/atualizado com sucesso!')
+            #VERIFICA SE O ARQUIV JÁ EXISTE
             if os.path.exists('dados_estoque.txt') == True:
-                with open('dados_estoque.txt', 'a', encoding='UTF-8') as a:
-                    a.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
+                
+                # VERIFICAÇÃO DE GRUPO
+                if nome_prod in grupo['perifericos']:
+                    with open('dados_estoque.txt', 'a', encoding='UTF-8') as a:
+                        a.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco} - Grupo: Periféricos\n')
+                        dados_produtos.update({f'{nome_prod}': [quantidade, preco, 'Periféricos']})
+                else:
+                    with open('dados_estoque.txt', 'a', encoding='UTF-8') as a:
+                        a.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco} - Grupo: Computadores\n')
+                        dados_produtos.update({f'{nome_prod}': [quantidade, preco,'Computadores']})
+            
             else:
-                with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
-                    w.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco}\n')
+                #VERIFICAÇÃO DE GRUPO
+                if nome_prod in grupo['perifericos']:
+                    with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
+                        w.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco} - Grupo: Periféricos\n')
+                        dados_produtos.update({f'{nome_prod}': [quantidade, preco, 'Periféricos']})
+                else:
+                    with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
+                        w.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco} - Grupo: Computadores\n')
+                        dados_produtos.update({f'{nome_prod}': [quantidade, preco,'Computadores']})
+                        
+                        
     except ValueError as error:
         print(f'Entrada inválida: {error}')
         print('Por favor, insira os dados corretamente e tente novamente.')
         input('Pressione Enter para voltar ao menu...')
 
+# adiconar_produtos(dados_produtos=dados_produtos, grupo=grupo)
 
 
-
-#FUNÇÃO DE REMOVER PRODUTOS
+# #FUNÇÃO DE REMOVER PRODUTOS
 def remover_produtos(dados_produtos):
     try:
         remover = str(input('Informe o nome do produto que deseja remover do estoque: ')).strip().lower()
@@ -195,11 +222,11 @@ def remover_produtos(dados_produtos):
         print(f'Entrada inválida: {error}')
         print('Por favor, insira os dados corretamente e tente novamente.')
         input('Pressione Enter para voltar ao menu...')
-
-
+        
+# remover_produtos(dados_produtos=dados_produtos)
 
 #FUNÇÃO DE ATUALIZAR PRODUTOS
-def atualizar_produtos(dados_produtos):
+def atualizar_produtos(dados_produtos, grupo):
     
     try:
         produto_atualizar = str(input('Qual produto deseja atualizar: ')).strip().lower()
@@ -218,21 +245,35 @@ def atualizar_produtos(dados_produtos):
         else:
             nova_quantidade = int(input(f'Digite a nova quantidade disponível do produto {produto_atualizar}: '))
             novo_preco = float(input(f'Digite o novo valor de cada produto: '))
-            dados_produtos.update({f'{produto_atualizar}':[nova_quantidade, novo_preco]})
-            with open('dados_estoque.txt', 'r', encoding='UTF-8') as r:
-                lista = r.readlines()
-                for i, valor in enumerate(lista):
-                    nome_arquivo = valor.split(' - ')[0].split(':')[1].strip().lower()
-                    if nome_arquivo == produto_atualizar:
-                        lista[i] = f'Nome produto: {produto_atualizar} - Quantidade: {nova_quantidade} - Preço: {novo_preco}\n'
-                        with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
-                            w.writelines(lista)
-                        print(f'Produto "{produto_atualizar}" atualizado com sucesso.')
+            if produto_atualizar in grupo['perifericos']:
+                with open('dados_estoque.txt', 'r', encoding='UTF-8') as r:
+                    lista = r.readlines()
+                    for i, valor in enumerate(lista):
+                        nome_arquivo = valor.split(' - ')[0].split(':')[1].strip().lower()
+                        if nome_arquivo == produto_atualizar:
+                            lista[i] = f'Nome produto: {produto_atualizar} - Quantidade: {nova_quantidade} - Preço: {novo_preco} - Grupo: Periféricos\n'
+                            dados_produtos.update({f'{produto_atualizar}':[nova_quantidade, novo_preco, 'Periféricos']})
+                            with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
+                                w.writelines(lista)
+                            print(f'Produto "{produto_atualizar}" atualizado com sucesso.')
+            else:
+                with open('dados_estoque.txt', 'r', encoding='UTF-8') as r:
+                    lista = r.readlines()
+                    for i, valor in enumerate(lista):
+                        nome_arquivo = valor.split(' - ')[0].split(':')[1].strip().lower()
+                        if nome_arquivo == produto_atualizar:
+                            lista[i] = f'Nome produto: {produto_atualizar} - Quantidade: {nova_quantidade} - Preço: {novo_preco} - Grupo: Computadores\n'
+                            dados_produtos.update({f'{produto_atualizar}':[nova_quantidade, novo_preco, 'Computadores']})
+                            with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
+                                w.writelines(lista)
+                            print(f'Produto "{produto_atualizar}" atualizado com sucesso.')
 
     except ValueError as error:
         print(f'Entrada inválida: {error}')
         print('Por favor, insira os dados corretamente e tente novamente.')
         input('Pressione Enter para voltar ao menu...')
+        
+# atualizar_produtos(dados_produtos=dados_produtos, grupo=grupo)
 
 #FUNÇÃO DE MOSTRAR NA TELA
 def mostrar_tela(tamanho_linha):
@@ -264,7 +305,7 @@ while True:
         #ADICIONAR PRODUTO
         if escolha_user == 'Adicionar Produto':
             os.system('cls')
-            adiconar_produtos(dados_produtos=dados_produtos)
+            adiconar_produtos(dados_produtos=dados_produtos,grupo=grupo)
 
         #REMOVER PRODUTO
         elif escolha_user == 'Remover Produto':
@@ -274,7 +315,7 @@ while True:
         #ATUALIZAR PRODUTO
         elif escolha_user ==  'Atualizar Produto':
             os.system('cls')
-            atualizar_produtos(dados_produtos=dados_produtos)
+            atualizar_produtos(dados_produtos=dados_produtos,grupo=grupo)
         
         #MOSTRAR PRODUTOS NA TELA
         elif escolha_user == 'Mostrar Produtos':
