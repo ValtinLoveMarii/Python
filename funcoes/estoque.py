@@ -121,7 +121,7 @@ def carregar_dados_arquivo():
                         qtd = int(partes[1].split(':')[1].strip())      
                         preco = float(partes[2].split(':')[1].strip()) 
                         grupo = partes[3].split(':')[1].strip()
-                        dados[nome] = [qtd, preco, grupo, i]
+                        dados[nome] = [qtd, preco, grupo]
                         
                     except Exception as e:
                         print(f"Erro ao processar linha: {linha}\nDetalhes: {e}")
@@ -135,7 +135,6 @@ dados_produtos = carregar_dados_arquivo() #-----> PARA TESTE DE DEBUG
 
 #FUNÇÃO DE ADICINAR PRODUTOS
 def adiconar_produtos(dados_produtos, grupo):
-    id_item = len(dados_produtos)
     try:
         nome_prod = input('Informe o nome do produto: ').strip().lower()
         if not nome_prod:
@@ -161,22 +160,22 @@ def adiconar_produtos(dados_produtos, grupo):
                 if nome_prod in grupo['perifericos']:
                     with open('dados_estoque.txt', 'a', encoding='UTF-8') as a:
                         a.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco} - Grupo: Periféricos\n')
-                        dados_produtos.update({f'{nome_prod}': [quantidade, preco, 'Periféricos',id_item]})
+                        dados_produtos.update({f'{nome_prod}': [quantidade, preco, 'Periféricos']})
                 else:
                     with open('dados_estoque.txt', 'a', encoding='UTF-8') as a:
                         a.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco} - Grupo: Computadores\n')
-                        dados_produtos.update({f'{nome_prod}': [quantidade, preco,'Computadores', id_item]})
+                        dados_produtos.update({f'{nome_prod}': [quantidade, preco,'Computadores']})
             
             else:
                 #VERIFICAÇÃO DE GRUPO
                 if nome_prod in grupo['perifericos']:
                     with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
                         w.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco} - Grupo: Periféricos\n')
-                        dados_produtos.update({f'{nome_prod}': [quantidade, preco, 'Periféricos',id_item]})
+                        dados_produtos.update({f'{nome_prod}': [quantidade, preco, 'Periféricos']})
                 else:
                     with open('dados_estoque.txt', 'w', encoding='UTF-8') as w:
                         w.write(f'Nome produto: {nome_prod} - Quantidade: {quantidade} - Preço: {preco} - Grupo: Computadores\n')
-                        dados_produtos.update({f'{nome_prod}': [quantidade, preco,'Computadores',id_item]})
+                        dados_produtos.update({f'{nome_prod}': [quantidade, preco,'Computadores']})
                         
                         
     except ValueError as error:
