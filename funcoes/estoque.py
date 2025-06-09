@@ -211,11 +211,15 @@ def atualizar_produtos(dados_produtos, grupo):
 
 # #FUNÇÃO DE MOSTRAR NA TELA
 def mostrar_tela(tamanho_linha):
-    with open('dados_estoque.txt', 'r', encoding='utf-8-sig') as r:
-        print('=' * tamanho_linha)
-        print('PRODUTOS CADASTRADOS NO ESTOQUE'.center(tamanho_linha))
-        print('=' * tamanho_linha)
-        print(r.read())
+    if os.path.exists('dados_estoque.py') == True:
+        with open('dados_estoque.txt', 'r', encoding='utf-8-sig') as r:
+            print('=' * tamanho_linha)
+            print('PRODUTOS CADASTRADOS NO ESTOQUE'.center(tamanho_linha))
+            print('=' * tamanho_linha)
+            print(r.read())
+    else:
+        print('O estoque ainda não possuí dados!')
+        
 dados_produtos = carregar_dados_arquivo()
 while True:
     os.system('cls')
