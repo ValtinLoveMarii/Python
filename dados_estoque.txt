@@ -1,3 +1,0 @@
-Nome produto: pp - Quantidade: 12 - Preço: 34.0
-Nome produto: qqq - Quantidade: 12 - Preço: 34.0
-Nome produto: eee - Quantidade: 12 - Preço: 34.0
