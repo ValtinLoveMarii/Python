@@ -30,15 +30,27 @@
 
 
 #POO - Classes e Objetos
-class Carro():
-    def __init__(self, marca, modelo):
-        self.marca = marca
-        self.modelo = modelo
+class Registrar():
+    def __init__(self, nome, idade , cpf, email):
+        self.nome = nome
+        self.idade = idade
+        self.cpf = cpf
+        self.email = email
+    def registrar_paciente(self, dic):
+        dic.update({'Nome':self.nome, "Idade":self.idade, 'Cpf':self.cpf, 'E-mail':self.email})
+        return dic
     
-    def andar(self):
-        print(f'ANDANDO...... {self.marca}') 
+    def verificar_paciente(self):
+        if self.idade >= 60:
+            print('Grupo de Risco......')
+        elif self.idade < 60 and self.idade >= 30:
+            print('Ta de boa demais......')
+        elif self.idade < 30 and self.idade > 0:
+            print('Neném nem precisa se preocupar....')
+    
 
-carro1 = Carro('Mercedes', 'Benz')
-carro1.andar()
-carro2 = Carro('Ferrari', 'Veneno')
-carro2.andar()
+dic = {}
+paciente1 = Registrar('Pedro', 60, '121220-1', 'pepedogremio@gmail.com')
+paciente1.registrar_paciente(dic=dic)
+paciente1.verificar_paciente()
+print(dic)
