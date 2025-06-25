@@ -83,3 +83,110 @@ class  ContaBancaria():
 # conta1.depositar(400)
 # conta1.sacar(230)
 # conta1.extrato()
+
+
+#EX6 - Criar Produto e Carrinho
+class Produto():
+    def __init__(self, nome, preco):
+        self.nome = nome
+        self.preco = preco
+    
+class CarrinhoCompras():
+    def __init__(self):
+        self.lista = []
+
+    def add_item(self, valor):
+        self.lista.append(valor)
+
+    def read_values(self):
+        for x in self.lista:
+            print(f'{x.nome} - Valor: {x.preco}')
+
+    def sum_values(self):
+        total = 0
+        for x in self.lista:
+            total = x.preco + total
+        print(f'total - {total}')
+
+# produto1 = Produto('leite', 2)
+# produto2 = Produto('carne', 5)
+# produto3 = Produto('manteiga', 3)
+
+# carrinho = CarrinhoCompras()
+# carrinho.add_item(produto1)
+# carrinho.add_item(produto2)
+# carrinho.add_item(produto3)
+
+# carrinho.read_values()
+# carrinho.sum_values()
+
+#EX7 - Crie uma classe com métodos para somar, subtrair, multiplicar e dividir dois números. Os valores devem ser passados ao instanciar o objeto, e os métodos devem retornar os resultados.
+class Calculadora():
+    def __init__(self, num1, num2):
+        self.num1 = num1
+        self.num2 = num2
+    
+    def somar(self):
+        print(f'A soma entre {self.num1} e {self.num2} é {self.num1 + self.num2}')
+
+    def subtrair(self):
+        print(f'A diferença entre {self.num1} e {self.num2} é {self.num1 - self.num2}')
+
+    def mult(self):
+        print(f'O produto entre {self.num1} e {self.num2} é {self.num1 * self.num2}')
+
+    def divi(self):
+        print(f'A divisao entre {self.num1} e {self.num2} é {self.num1 / self.num2}')
+
+# item1 = Calculadora(9, 2)
+# item1.somar()
+# item1.subtrair()
+# item1.mult()
+# item1.divi()
+
+#EX8 - Crie uma classe CaixaMensagem que guarda uma lista de mensagens: Métodos: enviar_mensagem(texto) listar_mensagens() limpar_caixa()
+import os
+class Mensagem():
+    def __init__(self, msg):
+        self.msg = msg
+    
+    def send(self):
+        print(f'Mensagem Enviada')
+
+    def list_msg(self):
+        print(self.msg)
+
+    def clear(self):
+        input('Enter para limpar...')
+        os.system('cls')
+        print('Limpado')
+
+# msg1 = Mensagem('Naruto é brabo')
+# msg1.send()
+# msg1.list_msg()
+# msg1.clear()
+
+#EX9 - Crie a classe Musica com titulo, artista, duracao.Crie a classe Playlist que pode: Adicionar músicas. Mostrar todas as músicas. Calcular tempo total da playlist.
+class Spotify_Music():
+    def __init__(self, title, singer, time):
+        self.title = title
+        self.singer = singer
+        self.time = time
+
+class Playlist():
+    def __init__(self):
+        self.play = {}
+
+    def add_music(self, valor):
+        self.play.update({valor.title: [valor.singer, valor.time]})
+
+    def show_playlist(self):
+        for x,z in self.play.items():
+            print(f'Artista: {x} - Music {z}')
+# music1 = Spotify_Music('Rap Jinx', 'TvJinx', 5)
+# music2 = Spotify_Music('Rap Vi', 'TvJinx', 4)
+
+# playlist1 = Playlist()
+# playlist1.add_music(music1)
+# playlist1.add_music(music2)
+# playlist1.show_playlist()

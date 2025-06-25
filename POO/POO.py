@@ -99,3 +99,4 @@ class Paciente():
 pac = Paciente.idadeAnoNascimento('Mona', 1957, '000.222.000', 'monaadwadawd')
 print(pac.__dict__)
 print(pac.idade)
+
