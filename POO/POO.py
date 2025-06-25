@@ -30,27 +30,72 @@
 
 
 #POO - Classes e Objetos
-class Registrar():
-    def __init__(self, nome, idade , cpf, email):
+
+class Conta():
+    #ATRIBUTO DE CLASSE
+    taxa = 0.50
+    #METODO DE CLASSE
+    @staticmethod
+    def retornarCodigoBanco():
+        print('Código: 345')
+        
+    
+    """Atributos de Instâncias""" # --> Construtor
+    def __init__(self, numero, titular, saldo):
+        self.numero = numero
+        self.titular = titular
+        self.saldo = saldo
+        
+
+    def extrato(self): # --> Método/Função
+        self.saldo -= Conta.taxa
+        print(f'Saldo: {self.saldo}')
+    
+    def depositar(self, valor): # --> Método/Função
+        self.saldo += valor
+        print(f'Novo saldo: {self.saldo}')
+    
+    def sacar(self, sacar): # --> Método/Função
+        if sacar > self.saldo:
+            print(f'Saldo Insuficiente para sacar!')
+        else:
+            self.saldo -= sacar
+
+
+c1 = Conta(1, 'Finn', 1800)
+c2 = Conta(2, 'Jake', 3400)
+
+
+Conta.retornarCodigo() # --> MÉTODO DA CLASSE
+
+Conta.retornarCodigoBanco() # --> MÉTODO ESTÁTICO
+
+
+#ATRIBUTO DINAMICO
+# c2.signo = 'Peixes' # -> Atributo Dinamico criado somente para o c2
+# -> print(c2.__dict__) 
+
+
+# CLASSE PARA HOSPITAL
+from datetime import date
+class Paciente():
+    @classmethod
+    def idadeAnoNascimento(cls, nome,anoNascimento, cpf, email):
+        idade = date.today().year - anoNascimento
+        return cls(nome, idade, cpf, email)
+        
+    def __init__(self, nome, idade, cpf, email):
         self.nome = nome
         self.idade = idade
         self.cpf = cpf
         self.email = email
-    def registrar_paciente(self, dic):
-        dic.update({'Nome':self.nome, "Idade":self.idade, 'Cpf':self.cpf, 'E-mail':self.email})
-        return dic
-    
-    def verificar_paciente(self):
-        if self.idade >= 60:
-            print('Grupo de Risco......')
-        elif self.idade < 60 and self.idade >= 30:
-            print('Ta de boa demais......')
-        elif self.idade < 30 and self.idade > 0:
-            print('Neném nem precisa se preocupar....')
-    
+        
+	
+# pac = Paciente('Mona', 89, '000.222.000', 'monaadwadawd')
+# print(pac.__dict__)
 
-dic = {}
-paciente1 = Registrar('Pedro', 60, '121220-1', 'pepedogremio@gmail.com')
-paciente1.registrar_paciente(dic=dic)
-paciente1.verificar_paciente()
-print(dic)
+# print(Paciente.idadeAnoNascimento(2001))
+
+pac = Paciente.idadeAnoNascimento('Mona', 1957, '000.222.000', 'monaadwadawd')
+print(pac.__dict__)
+print(pac.idade)
