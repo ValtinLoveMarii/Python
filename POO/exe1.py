@@ -190,3 +190,45 @@ class Playlist():
 # playlist1.add_music(music1)
 # playlist1.add_music(music2)
 # playlist1.show_playlist()
+
+
+#EX10 - PROJETO ANALISE DE DADOS BASICO Consiste em uma analise sobre uma loja
+vendas = [
+    {'dia': 'segunda', 'produto': 'camiseta', 'quantidade': 72, 'preco_unitario': 50},
+    {'dia': 'segunda', 'produto': 'calça', 'quantidade': 1, 'preco_unitario': 120},
+    {'dia': 'terça', 'produto': 'camiseta', 'quantidade': 5, 'preco_unitario': 50},
+    {'dia': 'quarta', 'produto': 'tênis', 'quantidade': 12, 'preco_unitario': 200},
+    {'dia': 'quarta', 'produto': 'calça', 'quantidade': 9, 'preco_unitario': 120},
+    {'dia': 'quinta', 'produto': 'camiseta', 'quantidade': 11, 'preco_unitario': 250},
+    {'dia': 'sexta', 'produto': 'tênis', 'quantidade': 71, 'preco_unitario': 200},
+    {'dia': 'sexta', 'produto': 'oculos', 'quantidade': 19, 'preco_unitario': 20},
+]
+
+
+#ANALISE
+class AnaliseQtd():
+    def __init__(self, vendas):
+        self.vendas = vendas
+        self.total_prods = {}
+    
+    def qtd_vendas(self):
+        for x in self.vendas:
+            produto = x['produto']
+            if produto not in self.total_prods:
+                self.total_prods.update({produto:x['quantidade']})
+            else:
+                valor_inicial = self.total_prods[produto]
+                valor_novo = valor_inicial + x['quantidade']
+                self.total_prods.update({produto:valor_novo})
+                
+        # print(self.total_prods)
+    
+    def listar_produtos(self):
+        for prod, valor in self.total_prods.items():
+            print(f'Produto: {prod} - Valor: R${valor},00')
+    
+                
+            
+v1 = AnaliseQtd(vendas)
+v1.qtd_vendas()
+v1.listar_produtos()
