@@ -210,6 +210,8 @@ class AnaliseQtd():
     def __init__(self, vendas):
         self.vendas = vendas
         self.total_prods = {}
+        self.final_list = {}
+        self.maior_prod = 0
     
     def qtd_vendas(self):
         for x in self.vendas:
@@ -225,10 +227,43 @@ class AnaliseQtd():
     
     def listar_produtos(self):
         for prod, valor in self.total_prods.items():
-            print(f'Produto: {prod} - Valor: R${valor},00')
+            print(f'Produto: {prod} - Quantidade: {valor}')
     
-                
+
+    def total_preco_produto(self):
+        total_preco = {}
+        for x in self.vendas:
+            produto = x['produto']
+            valor = x['preco_unitario']
+            if produto not in total_preco:
+                total_preco.update({produto:valor})
+            else:
+                valor_inicial = total_preco[produto]
+                valor_final = valor_inicial + valor
+                total_preco.update({produto:valor_final})
+        
+        for i,z in self.total_prods.items():
+            preco_prod = total_preco[i]
+            qtd_prod = z
+
+            self.final_list.update({i:preco_prod*qtd_prod})
+
+        print(self.final_list)
+
+    def melhor_produto(self):
+        maior = 0
+        for x,z in self.final_list.items():
+            if z > maior:
+                maior = z
+                maior_produto = x
+            else:
+                continue
+        print(f'Item com o maior valor de venda: {maior_produto}')
+
             
+
 v1 = AnaliseQtd(vendas)
 v1.qtd_vendas()
 v1.listar_produtos()
+v1.total_preco_produto()
+v1.melhor_produto()
