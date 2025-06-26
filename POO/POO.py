@@ -100,3 +100,40 @@ pac = Paciente.idadeAnoNascimento('Mona', 1957, '000.222.000', 'monaadwadawd')
 print(pac.__dict__)
 print(pac.idade)
 
+
+"""
+Visibilidade - Modificador de Acesso
+privada (private) -> restritiva  -> Os atributos so podem ser mudados dentro da classe
+protegida (protected) ->  intermediaria -> Atributos so podem ser manipulados dentro da classe e nas sub-classes ou que herdam os atributos e metododos
+pubica (public) -> livre -> Os atributos e metodos podem ser utilizados em qualquer lugar(parte do código)
+"""
+
+class Private():
+    def __init__(self, saldo, nome, idade):
+        self.__saldo = saldo # --> Atributo PRIVADO, SÓ PODE SER USADO NESSA CLASE 'PRIVATE'
+        self.nome = nome # --> Atributo PUBLICA, PODE SER ACESSADO POR TODOS
+        self._idade = idade # --> Atributo PROTEGIDA, SÓ PODE SER USADO PELA CLASSE E SUB-CLASSES E AS QUE HERDAM ESSA CLASSE
+    def show(self):
+        print(self.__saldo)
+        print(self._idade)
+
+
+
+"""
+NAME MANGLING
+"""
+class Quadrado():
+    def __init__(self, lado):
+        self.__lado = lado
+    
+    def area(self):
+        print(self.__lado * self.__lado)
+        
+q1 = Quadrado(2)
+q1.area()
+q1.__lado = 999 # --> ATRIBUTO DINÂMICO
+q1.area()
+print(q1.__dict__)
+q1._Quadrado__lado = 12 # --> NAME MANGLING
+q1.area()
+
