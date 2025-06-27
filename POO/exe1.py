@@ -267,3 +267,72 @@ v1.qtd_vendas()
 v1.listar_produtos()
 v1.total_preco_produto()
 v1.melhor_produto()
+
+#EX11- Crie uma classe Livro com atributos titulo, autor, preco, estoque. Crie métodos para adicionar e remover do estoque, e para mostrar as informações do livro.
+class Livro():
+    def __init__(self, titulo, autor, preco):
+        self.titulo = titulo
+        self.autor = autor
+        self.preco = preco
+
+class Biblioteca():
+    def __init__(self):
+        self.estoque = {}
+    
+    def add_book(self, valor):
+        self.estoque.update({valor.titulo:[valor.autor, valor.preco]})
+        print(self.estoque)
+    
+    def remove_book(self, valor):
+        self.estoque.pop(valor.titulo)
+        print(self.estoque)
+        
+    def read_book(self):
+        for x,z in self.estoque.items():
+            print(f'Livro - {x} - Autor: {z[0]} - Preço: {z[1]}')
+
+# l1 = Livro('As desumildade mata', 'JovemMilo', 12)
+# estoque = Biblioteca()
+# estoque.add_book(l1)
+# estoque.read_book()
+# estoque.remove_book(l1)
+
+
+#EX12 - Crie uma classe Carro com atributos modelo, consumo_por_km, e combustivel. Crie métodos para abastecer e dirigir (reduz o combustível com base na distância e no consumo).
+class Carro():
+    def __init__(self, modelo, consumo_km, combustivel):
+        self.modelo = modelo
+        self.consumo_km = consumo_km
+        self.combustivel = combustivel
+    
+    def abastecer(self, valor):
+        valor = valor + self.combustivel
+        print(f'Novo valor no tanque: {valor}')
+    
+    def dirigir(self, valor):
+        valor = self.consumo_km * valor
+        print(f'Gastou isso de combustível: {valor}')
+    
+# car1 = Carro('fiat', 2, 20)
+# car1.abastecer(23)
+# car1.dirigir(200)
+
+#EX13 - Classe Agenda de Contatos Crie uma classe Contato com nome, telefone, email. Crie uma classe Agenda que guarda vários contatos em uma lista e permite: adicionar contato remover contato pelo nome buscar contato pelo nome listar todos os contatos.
+class Contato():
+    def __init__(self, nome, telefone, email):
+        self.nome = nome
+        self.telefone = telefone
+        self.email = email
+        self.lista_contato = {}
+    
+    def add_cont(self, valor):
+        self.lista_contato.update({valor.nome:[valor.telefone, valor.email]})
+        # print(self.lista_contato)
+        
+    def list_cont(self):
+        for x,z in self.lista_contato.items():
+            print(f'Contato: {x} - {z}')
+    
+# c1 = Contato('Superman', 9991212, 'super@fadwad')
+# c1.add_cont(c1)
+# c1.list_cont()
