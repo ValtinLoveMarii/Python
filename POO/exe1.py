@@ -336,3 +336,97 @@ class Contato():
 # c1 = Contato('Superman', 9991212, 'super@fadwad')
 # c1.add_cont(c1)
 # c1.list_cont()
+
+#EX14 - Crie uma classe chamada ContaBancaria que simula uma conta bancária. A classe deve ter os seguintes atributos e métodos: saldo (float): o saldo da conta. titular (string): o nome do titular da conta. Métodos: depositar(valor): Método para depositar um valor na conta. O valor deve ser positivo. sacar(valor): Método para sacar um valor da conta. O valor deve ser positivo e o saldo deve ser suficiente para o saque.
+
+class Conta():
+    def __init__(self, saldo, titular):
+        self.__saldo = saldo
+        self.titular = titular
+        self.__historico = []
+    
+    def sacar(self, valor):
+        self.__saldo -= valor
+        self.atualizar_extrado(self.__saldo) # --> CHAMA a FUNÇÃO atualizar_extrato, e passa o valor do parametro dela, que seria o saldo após a alteração
+    
+    def depositar(self, valor):
+        self.__saldo += valor
+        self.atualizar_extrado(self.__saldo) # --> CHAMA a FUNÇÃO atualizar_extrato, e passa o valor do parametro dela, que seria o saldo após a alteração
+    
+    def tranferir(self, valor, destino):
+        if valor > self.__saldo:
+            print(f'Saldo Insuficiente para Enviar!')
+        else:
+            self.sacar(valor)
+            destino.depositar(valor)
+        
+    def saldo_atual(self):
+        print(f'Saldo: {self.__saldo}')
+    
+    def extrado(self):
+        for i in self.__historico:
+            print(f'---EXTRATO {self.titular}---')
+            print(f'Saldo Atual: {i}')
+    
+    def atualizar_extrado(self,saldo):
+        self.__historico.append(saldo)
+        
+# c1 = Conta(3000,'Gabo')
+# c2 = Conta(4000, 'Dedé')
+# c1.tranferir(300, c2) # --> GABO TRANSFERIU UM VALOR PARA O DEDÉ
+# c2.extrado() # --> DEDÉ VERIFICOU O EXTRATO E O SEU PIX
+# c1.extrado() # --> GABO VERIFICOU O EXTRATO APÓS A TRANSFERENCIA
+
+
+#EX15 - Crie uma classe chamada Produto que representa um produto em um sistema de vendas. A classe deve ter os seguintes atributos e métodos: Atributos: nome (string): nome do produto. preco (float): preço do produto. quantidade (int): quantidade disponível do produto. Métodos: alterar_preco(preco): Permite alterar o preço do produto, mas somente se o novo preço for maior que zero. vender(quantidade): Realiza a venda de uma quantidade do produto. Caso a quantidade seja maior que a disponível, o sistema deve informar que não há estoque suficiente. exibir_informacoes(): Exibe as informações do produto (nome, preço e quantidade).
+
+# class Produto():
+#     def __init__(self, nome, preco, quantidade):
+#         self.nome = nome
+#         self.__preco = preco
+#         self.__quantidade = quantidade
+#         self.__lucro = 0
+
+#     def alterar_preco(self, valor):
+#         if valor > 0:
+#             self.__preco = valor
+#         else:
+#             print(f'Valor Negativo')
+        
+#     def vender(self, qtd):
+#         self.__quantidade -= qtd
+    
+#     def lucro_empresa(self):
+#         self.__lucro = self.__quantidade * self.__preco
+
+#     def exibir_produto(self):
+#         self.lucro_empresa()
+#         print(f'Lucro: {self.__lucro}')
+
+# p1 = Produto('Leite', 2, 90)
+# p1.alterar_preco(4)
+# p1.vender(20)
+# p1.exibir_produto()
+
+#EX16 - Crie uma classe Estoque que gerencia um estoque de produtos. A classe deve conter os seguintes atributos e métodos:
+#nome_produto (string): nome do produto. preco (float): preço unitário do produto. quantidade_em_estoque (int): quantidade disponível do produto no estoque. quantidade_vendida (int): quantidade total já vendida.
+#atualizar_estoque(quantidade): Atualiza a quantidade disponível no estoque. vender_produto(quantidade): Vende uma quantidade do produto. O estoque não pode ser negativo, então se a quantidade for maior que a disponível, imprima uma mensagem de erro. calcular_faturamento(): Calcula o faturamento gerado pelas vendas, multiplicando o preço pelo total de unidades vendidas. exibir_resumo(): Exibe o nome do produto, quantidade em estoque, quantidade vendida e o faturamento.
+
+class Estoque():
+    def __init__(self,nome,preco, qtd_estoque):
+        self.nome = nome
+        self.__preco = preco
+        self.__qtd_estoque = qtd_estoque
+        self.__qtd_vendas = 0
+        self.__lucro = 0
+    
+    def atualizar_estoque(self, valor):
+        self.__qtd_estoque = valor
+        print(self.__qtd_estoque)
+    
+    def vender(self, valor):
+        self.__qtd_estoque -= valor
+        self.__lucro = valor * self.__preco
+    
+    def exibir(self):
+        print(self.__lucro)
