@@ -262,11 +262,11 @@ class AnaliseQtd():
 
             
 
-v1 = AnaliseQtd(vendas)
-v1.qtd_vendas()
-v1.listar_produtos()
-v1.total_preco_produto()
-v1.melhor_produto()
+# v1 = AnaliseQtd(vendas)
+# v1.qtd_vendas()
+# v1.listar_produtos()
+# v1.total_preco_produto()
+# v1.melhor_produto()
 
 #EX11- Crie uma classe Livro com atributos titulo, autor, preco, estoque. Crie métodos para adicionar e remover do estoque, e para mostrar as informações do livro.
 class Livro():
@@ -380,28 +380,28 @@ class Conta():
 
 #EX15 - Crie uma classe chamada Produto que representa um produto em um sistema de vendas. A classe deve ter os seguintes atributos e métodos: Atributos: nome (string): nome do produto. preco (float): preço do produto. quantidade (int): quantidade disponível do produto. Métodos: alterar_preco(preco): Permite alterar o preço do produto, mas somente se o novo preço for maior que zero. vender(quantidade): Realiza a venda de uma quantidade do produto. Caso a quantidade seja maior que a disponível, o sistema deve informar que não há estoque suficiente. exibir_informacoes(): Exibe as informações do produto (nome, preço e quantidade).
 
-# class Produto():
-#     def __init__(self, nome, preco, quantidade):
-#         self.nome = nome
-#         self.__preco = preco
-#         self.__quantidade = quantidade
-#         self.__lucro = 0
+class Produto():
+    def __init__(self, nome, preco, quantidade):
+        self.nome = nome
+        self.__preco = preco
+        self.__quantidade = quantidade
+        self.__lucro = 0
 
-#     def alterar_preco(self, valor):
-#         if valor > 0:
-#             self.__preco = valor
-#         else:
-#             print(f'Valor Negativo')
+    def alterar_preco(self, valor):
+        if valor > 0:
+            self.__preco = valor
+        else:
+            print(f'Valor Negativo')
         
-#     def vender(self, qtd):
-#         self.__quantidade -= qtd
+    def vender(self, qtd):
+        self.__quantidade -= qtd
     
-#     def lucro_empresa(self):
-#         self.__lucro = self.__quantidade * self.__preco
+    def lucro_empresa(self):
+        self.__lucro = self.__quantidade * self.__preco
 
-#     def exibir_produto(self):
-#         self.lucro_empresa()
-#         print(f'Lucro: {self.__lucro}')
+    def exibir_produto(self):
+        self.lucro_empresa()
+        print(f'Lucro: {self.__lucro}')
 
 # p1 = Produto('Leite', 2, 90)
 # p1.alterar_preco(4)
@@ -413,20 +413,108 @@ class Conta():
 #atualizar_estoque(quantidade): Atualiza a quantidade disponível no estoque. vender_produto(quantidade): Vende uma quantidade do produto. O estoque não pode ser negativo, então se a quantidade for maior que a disponível, imprima uma mensagem de erro. calcular_faturamento(): Calcula o faturamento gerado pelas vendas, multiplicando o preço pelo total de unidades vendidas. exibir_resumo(): Exibe o nome do produto, quantidade em estoque, quantidade vendida e o faturamento.
 
 class Estoque():
-    def __init__(self,nome,preco, qtd_estoque):
+    def __init__(self ,nome, preco, qtd):
         self.nome = nome
         self.__preco = preco
-        self.__qtd_estoque = qtd_estoque
-        self.__qtd_vendas = 0
+        self.__qtd = qtd
+        self.__vendas = 0
         self.__lucro = 0
     
+
     def atualizar_estoque(self, valor):
-        self.__qtd_estoque = valor
-        print(self.__qtd_estoque)
+        self.__qtd = valor
+    
     
     def vender(self, valor):
-        self.__qtd_estoque -= valor
-        self.__lucro = valor * self.__preco
+        self.__qtd -= valor
+        self.__vendas = valor
     
+    def faturamento(self):
+        self.__lucro = self.__vendas * self.__preco
+
     def exibir(self):
-        print(self.__lucro)
+        self.faturamento()
+        print(f'Faturamento: R${self.__lucro:.2f}')
+    
+
+# e1 = Estoque('Leite', 3, 30)
+# e1.atualizar_estoque(40)
+# e1.vender(12)
+# e1.exibir()
+
+#EX17 - Crie uma classe Dado que sorteia um número de 1 a 6. Crie outra classe Jogo que permite jogar o dado 5 vezes e mostrar a soma total.
+from random import randint
+class Dado():
+    def __init__(self):
+        pass
+    
+    def rolar(self):
+        return randint(1, 6)
+    
+class Jogo():
+    def __init__(self):
+        self.dado = Dado()
+        self.soma = []
+    
+    def jogar(self):
+        for x in range(5):
+            valor = self.dado.rolar()
+            self.soma.append(valor)
+            print(f'Caiu {valor}')
+
+    def exibir(self):
+        self.jogar()
+        print(sum(self.soma))
+
+# j1 = Jogo()
+# j1.exibir()
+
+#EX18 - Crie uma classe Votacao com um dicionário interno para contar votos em opções. Métodos: votar(opcao) resultado()
+import random
+class Voto():
+    def __init__(self):
+        self.lista = ['A', 'B']
+    
+    def vot(self):
+        return random.choice(self.lista)
+
+class Urna():
+    def __init__(self):
+        self.voto = Voto()
+        self.resultado = {'A':0, 'B':0}
+
+    def votacao(self):
+        for x in range(5):
+            valor = self.voto.vot()
+            self.resultado[valor] = self.resultado[valor] + 1
+        
+    def resultado_final(self):
+        self.votacao()
+        print(self.resultado)
+
+# u1 = Urna()
+# u1.resultado_final()
+
+#EX19 - Classe Sensor de Umidade Crie a classe Sensor com uma lista de valores lidos. Adicione métodos para: Adicionar nova leitura. Mostrar média de umidade. Mostrar maior e menor valor registrado.
+
+class SensorUmidade():
+    def __init__(self):
+        self.lista = []
+    
+    def add_item(self, valor):
+        for x in range(5):
+            valor = valor * randint(1, 7)
+            self.lista.append(valor)
+    def media(self):
+        media = sum(self.lista) / len(self.lista)
+        return media
+    def show(self, valor):
+        self.add_item(valor)
+        m = self.media()
+        print(self.lista)
+        print(m)
+
+# s1 = SensorUmidade()
+# s1.show(randint(1, 6))
+
+#EX20 - 
