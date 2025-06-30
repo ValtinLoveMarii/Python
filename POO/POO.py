@@ -137,3 +137,54 @@ print(q1.__dict__)
 q1._Quadrado__lado = 12 # --> NAME MANGLING
 q1.area()
 
+"""
+ENCAPSULAMENTO
+"""
+class Conta():
+    def __init__(self, titular,numero, saldo):
+        self.titular = titular
+        self.__numero = numero
+        self.__saldo = saldo
+        self.__historico = []
+    
+    def retornar_saldo(self):
+        print(f'Saldo: {self.__saldo}')  
+
+    
+    def transacao(self,saldo):
+        self.__historico.append(saldo)
+    
+    def extrato(self): # --> Método/Função
+        print('---EXTRATO---')
+        print(f"Conta: {self.titular}")
+        for saldo in self.__historico:
+            print(f'Saldo: {saldo}')
+    
+    def depositar(self, valor): # --> Método/Função
+        self.__saldo += valor
+        self.transacao(self.__saldo)
+    
+    def sacar(self, sacar): # --> Método/Função
+        if sacar > self.__saldo:
+            print(f'Saldo Insuficiente para sacar!')
+        else:
+            self.__saldo -= sacar
+            self.transacao(self.__saldo)
+    
+    def transferir(self, valor,destino):
+        self.sacar(valor)
+        destino.depositar(valor)
+
+
+
+c1 = Conta('Bolso', 123, 900)
+c2 = Conta('lula', 345, 2000)
+
+c1.transferir(300, c2)
+c1.transferir(100, c2)
+c1.extrato()
+
+
+# c1.sacar(500)
+# c1.depositar(100)
+# c1.saldo()
