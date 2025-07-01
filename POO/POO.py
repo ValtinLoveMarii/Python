@@ -188,3 +188,78 @@ c1.extrato()
 # c1.sacar(500)
 # c1.depositar(100)
 # c1.saldo()
+
+
+"""
+GETTERS E SETTERS, USADO PARA GET(RETORNAR O VALOR DE UM ATRIUBUTO) SET(COLOCAR VALOR EM UM ATRIBUTO)
+AJUDA NO REUSO E MANUTENÇÃO E NO ENCAPSULAMENTO DO CÓDIGO
+"""
+
+class Conta():
+    def __init__(self, titular, numero, saldo):
+        self.titular = titular
+        self.__numero = numero
+        self.__saldo = saldo
+        self.__historico = []
+        self.__historico_saldoConta = [saldo]
+    
+    """GET E SET NUMERO"""
+    @property # --> GET NUMERO - RETORNAR O NUMERO
+    def numero(self):
+        return self.__numero
+    
+    @numero.setter # --> SET NUMERO - ALTERA O NUMERO
+    def numero(self, numero):
+        self.__numero = numero
+    
+    """GET E SET SALDO"""
+    @property # --> GET SALDO - RETORNAR O SALDO
+    def saldo(self):
+        return self.__saldo
+    
+    @saldo.setter # --> SET SALDO - ALTERA O SALDO
+    def saldo(self, saldo):
+        self.__saldo = saldo
+        
+    """MÉTODOS APÓS O GET E SET"""
+    
+    def sacar(self, valor):
+        self.saldo -= valor
+        self.transacao_conta(valor)
+        self.valor_conta_atual(self.saldo)
+            
+    def depositar(self, valor):
+        self.saldo += valor
+        self.transacao_conta(valor)
+        self.valor_conta_atual(self.saldo)
+    
+        
+    def retornar_saldo(self):
+        print(f'Saldo Atual: {self.saldo}') 
+        
+    def trasnferir(self, valor, destino):
+        self.sacar(valor)
+        destino.depositar(valor)
+    
+    def transacao_conta(self, saldo):
+        self.__historico.append(saldo)
+        
+    def valor_conta_atual(self,valor):
+        self.__historico_saldoConta.append(valor)
+    
+    def historico_transferencia(self):
+        for x in self.__historico:
+            print(f'Transição feita R${x}')
+        
+    def historico_saldo(self):
+        for x in self.__historico_saldoConta:
+            print(f'Saldo na Conta: {x} {self.titular}')
+
+
+# c1 = Conta('Valtin', 1, 3200)
+# c2 = Conta('MariBB', 2, 4000)
+# c1.trasnferir(200, c2)
+# c1.historico_transferencia()
+# c1.historico_saldo()
+# c2.historico_transferencia()
+# c2.historico_saldo()
