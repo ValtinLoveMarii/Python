@@ -517,4 +517,185 @@ class SensorUmidade():
 # s1 = SensorUmidade()
 # s1.show(randint(1, 6))
 
-#EX20 - 
+#EX20 - Crie a classe Musica com titulo, artista, duracao.Crie a classe Playlist que pode: Adicionar músicas. Mostrar todas as músicas. Calcular tempo total da playlist. com GET E SET
+class Musica():
+    def __init__(self, titulo, artista, duracao):
+        self.__titulo = titulo
+        self.__artista = artista
+        self.duracao = duracao
+
+    """GET E SET"""
+    @property # --> GET
+    def titulo(self):
+        return self.__titulo
+
+    @titulo.setter # --> SET
+    def titulo(self, titulo):
+        self.__titulo = titulo
+    
+    """GET E SET"""
+    @property # --> GET
+    def artista(self):
+        return self.__artista
+
+    @artista.setter # --> SET
+    def artista(self, artista):
+        self.__artista = artista
+
+class Play():
+    def __init__(self):
+        self.lista = {}
+    
+    def add_music(self, valor):
+        self.lista.update({valor.titulo:[valor.artista, valor.duracao]})
+        print(self.lista)
+        
+# m1 = Musica('Rap Caiox', 'CaioxMC', 4)
+# p1 = Play()
+# p1.add_music(m1)
+
+#EX21 - #EX13 - Classe Agenda de Contatos Crie uma classe Contato com nome, telefone, email. Crie uma classe Agenda que guarda vários contatos em uma lista e permite: adicionar contato remover contato pelo nome buscar contato pelo nome listar todos os contatos.
+class Contato():
+    def __init__(self, nome, telefone, email):
+        self.nome = nome
+        self.__telefone = telefone
+        self.__email = email
+    
+    """GET E SETS"""
+    @property
+    def telefone(self):
+        return self.__telefone
+    
+    @telefone.setter
+    def telefone(self, telefone):
+        self.__telefone = telefone
+    
+    @property
+    def email(self):
+        return self.__email
+    
+    @email.setter
+    def email(self, email):
+        self.__email = email
+
+class Agenda():
+    def __init__(self):
+        self.agenda = {}
+    
+    def add_cont(self, valor):
+        self.agenda.update({valor.nome:[valor.telefone, valor.email]})
+    
+    def show_list(self):
+        for x,z in self.agenda.items():
+            print(f'Contato: {x}: Telefone - {z[0]} E-mail - {z[1]}')
+
+
+# c1 = Contato('Livro1', '12-99134124', 'lili@yahoo.com')
+# agenda = Agenda()
+# agenda.add_cont(c1)
+# agenda.show_list()
+
+
+#EX22 - Crie uma classe ContaBancaria com os atributos privados: titular, saldo.
+class Conta():
+    def __init__(self, titular, saldo):
+        self.__titular = titular
+        self.__saldo = saldo
+    
+    """GET E SET"""
+    @property
+    def titular(self):
+        return self.__titular
+    
+    @property
+    def saldo(self):
+        return self.__saldo
+    
+    def sacar(self, valor):
+        self.__saldo -= valor
+    
+    def depositar(self, valor):
+        self.__saldo += valor
+        
+    def show(self):
+        print(self.__saldo)
+        print(self.__titular)
+    
+# c1 = Conta('Mundial', 900)
+# c1.depositar(300)
+# c1.show()
+
+#EX23 - ANALISE DE VENDAS COM GET E SET
+class Analise():
+    def __init__(self, vendas):
+        self.__vendas = vendas
+        self.__totalProds = {}
+        self.__totalPreco = {}
+    
+    
+    """GET E SET"""
+    @property
+    def vendas(self):
+        return self.__vendas
+    
+    @vendas.setter
+    def vendas(self, vendas):
+        self.__vendas = vendas
+    
+    """GET E SET"""    
+    @property
+    def prods(self):
+        return self.__totalProds
+    
+    @prods.setter
+    def prods(self, totalProds):
+        self.__totalProds = totalProds
+    
+    """GET E SET"""
+    @property
+    def totalPreco(self):
+        return self.__totalPreco    
+    
+    @totalPreco.setter
+    def totalPreco(self, totalPreco):
+        self.__totalPreco = totalPreco
+        
+    #QUANTIDADE DE VENDAS PRODUTo
+    def qtd_vendas(self):
+        for x in self.vendas:
+            produto = x['produto']
+            if produto not in self.prods:
+                self.prods.update({produto:x['quantidade']})
+            else:
+                valor_inicial = x['quantidade']
+                valor_final = valor_inicial + self.prods[produto]
+                self.prods.update({produto:valor_final})
+        print(self.prods)
+    
+    def total_preco(self):
+        total_preco = {}
+        for x in self.vendas:
+            produto = x['produto']
+            if produto not in total_preco:
+                total_preco.update({produto:x['preco_unitario']})
+            else:
+                valor_inicial = total_preco[produto]
+                valor_final = x['preco_unitario'] + valor_inicial
+                total_preco.update({produto:valor_final})
+        
+        for x,z in self.prods.items():
+            print(x, z)
+            if x in total_preco:
+                self.totalPreco.update({x:total_preco[x] * z})
+
+            
+        # print(self.totalPreco)
+        
+    def melhor_prod(self):
+        m = max(self.totalPreco)
+        print(f'Produto com maior faturamento: {m}')
+
+# venda = Analise(vendas)
+# venda.qtd_vendas()
+# venda.total_preco()
+# venda.melhor_prod()
