@@ -699,3 +699,33 @@ class Analise():
 # venda.qtd_vendas()
 # venda.total_preco()
 # venda.melhor_prod()
+
+
+#EX25 - Crie uma classe Pessoa com os seguintes atributos privados:nome cpf Implemente os getters e setters, garantindo que: O nome não possa estar vazio. O CPF seja uma string de exatamente 11 dígitos numéricos.
+class Pessoa():
+    def __init__(self, nome ,cpf):
+        self.__nome = nome
+        self.__cpf = cpf
+    
+    @property # --> GET
+    def nome(self):
+        return self.__nome
+    
+    @nome.setter
+    def nome(self, nome):
+        self.__nome = nome
+    
+
+    @property
+    def cpf(self):
+        return self.__cpf
+    
+    @cpf.setter
+    def cpf(self, cpf):
+        if cpf == 11:
+            print('CPF Válido')
+        else:
+            print('Errado')
+        self.__cpf = cpf
+p1 = Pessoa('eu', 123456789)
+p1.cpf = 12333333
