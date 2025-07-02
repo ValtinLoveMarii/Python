@@ -103,8 +103,8 @@ print(pac.idade)
 
 """
 Visibilidade - Modificador de Acesso
-privada (private) -> restritiva  -> Os atributos so podem ser mudados dentro da classe
-protegida (protected) ->  intermediaria -> Atributos so podem ser manipulados dentro da classe e nas sub-classes ou que herdam os atributos e metododos
+privada (private) -> restritiva  -> Os atributos so podem ser mudados dentro da classe e subclasses
+protegida (protected) ->  intermediaria -> Atributos so podem ser manipulados dentro da classe e nas sub-classes, mas por fora pode mas é errado
 pubica (public) -> livre -> Os atributos e metodos podem ser utilizados em qualquer lugar(parte do código)
 """
 
@@ -263,3 +263,88 @@ class Conta():
 # c1.historico_saldo()
 # c2.historico_transferencia()
 # c2.historico_saldo()
+
+
+"""HERANÇA"""
+
+"""SUPERCLASSSE - CLASSE MÃE"""
+class Base(): # --> CLASSE BASE QUE TEM ATRIBUTOS COMUNS EM OUTRAS CLASSES
+    def __init__(self, nome, idade, rg, cpf, sexo):
+        self._nome = nome
+        self._idade = idade
+        self._rg = rg
+        self._cpf = cpf
+        self._sexo = sexo
+    
+    """GET E SET"""
+    @property
+    def nome(self):
+        return self._nome
+    
+    @property
+    def idade(self):
+        return self._idade
+    
+    @property
+    def rg(self):
+        return self._rg
+
+    @property
+    def cpf(self):
+        return self._cpf
+    
+    @property
+    def sexo(self):
+        return self._sexo
+
+"""SUBCLASSE - CLASSE FILHA"""
+class Aluno(Base): # --> A CLASSE ALUNO HERDOU A CLASSE BASE, OU SEJA TODOS OS ATRIBUTOS E MÉTODOS DE BASE PODEM ESTAR NO ALUNO AGORA
+    def __init__(self, rgm, ano, curso, nome, idade, rg, cpf, sexo): # --> AQUI ELE RECEBE OS DADOS DOS ATRIBUTOS E JA PASSA OS CERTO PARA A CLASSE MAE(SUPERCLASSE)
+        super().__init__(nome, idade, rg, cpf, sexo) # --> AQUI ELE HERDOU TODOS OS ATRIBUTOS DA SUPERCLASSE
+        self.__rgm = rgm
+        self.__ano = ano
+        self.__curso = curso
+    
+    """GET E SET de ALUNO(atributos específicos de ALUNO(rgm, ano, curso) )"""
+    @property
+    def rgm(self):
+        return self.__rgm
+    
+    @property
+    def ano(self):
+        return self.__ano
+    
+    @property
+    def curso(self):
+        return self.__curso
+    
+    def mostrar(self):
+        print(f'Aluno: {self.nome}, idade: {self.idade}')
+
+
+"""SUBCLASSE - CLASSE FILHA"""
+class Professor(Base):
+    def __init__(self, materia, salario, nome, idade, rg, cpf, sexo):
+        super().__init__(nome, idade, rg, cpf, sexo)
+        self._materia = materia
+        self._salario = salario
+        self._carga = 10
+    
+    @property
+    def materia(self):
+        return self._materia
+    
+    @property
+    def salario(self):
+        return self._salario
+    
+    @property
+    def carga(self):
+        return self._carga
+    
+    def mostrar(self):
+        print(f'Professor: {self.nome}, idade: {self.idade}, carga: {self.carga}, salario: {self.salario}')
+# a1 = Aluno(1, 7, 'Ti', 'Valquiria', 23, 238890, 5499, 'F')
+# a1.mostrar()
+# p1 = Professor('MAT', 10000, 'Oscar', 56, 889900, 29988, 'M')
+# p1.mostrar()
