@@ -75,6 +75,7 @@ class Votacao():
                 self.listaVotos[valor] += 1
     
     def resultado(self):
+        pass
 
 #EX3 - Crie uma classe base chamada Veiculo com os atributos: marca modelo ano Adicione também um método mostrar_info que imprima os dados do veículo. Depois, crie uma subclasse chamada Carro que herde de Veiculo e adicione um atributo: numero_de_portas Implemente o método mostrar_info na subclasse para incluir também o número de portas do carro.
 class Veiculo():
@@ -231,17 +232,89 @@ class OrgaoPublico(Base):
     def __init__(self, nome, idade, cpf, sexo, esfera_governo):
         super().__init__(nome, idade, cpf, sexo)
         self.__esfera_governo = esfera_governo
+
+
+
+#EX7 - Exercício 8: Sistema de Transporte Classe base: Transporte capacidade velocidade_maxima Subclasses: Onibus: tem numero_de_passageiros Caminhao: tem carga_maxima Crie o método exibir_dados() na classe base e use nas subclasses.
+
+class Transporte():
+    def __init__(self, capacidade, velo_maxima):
+        self.__capacidade = capacidade
+        self.__velo_maxima = velo_maxima
     
+
+    def exibir_dados(self, capacidade, velo_maxima, *args):
+        print(f'{capacidade}, {velo_maxima}, {args[0]}')
+
     """GET"""
-    def esfera_governo(self):
-        return self.__esfera_governo
+    @property
+    def capacidade(self):
+        return self.__capacidade
     
-        self.votar()
-        print(self.listaVotos)
-        if self.listaVotos['A'] > self.listaVotos['B']:
-            print('A ganhou')
-        else:
-            print('B ganhou')
-v1 = Voto()
-votocao = Votacao()
-votocao.resultado()
+    @property
+    def velo_maxima(self):
+        return self.__velo_maxima
+
+class Onibus(Transporte):
+    def __init__(self, capacidade, velo_maxima, passageiros):
+        super().__init__(capacidade, velo_maxima)
+        self.__passageiros = passageiros
+    
+
+    """"GET"""
+    @property
+    def passageiros(self):
+        return self.__passageiros
+    
+    def mostrar_dados(self):
+        self.exibir_dados(self.capacidade, self.velo_maxima, self.passageiros)
+
+
+# o1 = Onibus(44, 120, 12)
+# o1.mostrar_dados()
+
+class Caminhao(Transporte):
+    def __init__(self, capacidade, velo_maxima, carga_maxima):
+        super().__init__(capacidade, velo_maxima)
+        self.__carga_maxima = carga_maxima
+
+    """GET"""
+    @property
+    def carga_maxima(self):
+        return self.__carga_maxima
+    
+    
+    def mostrar_dados(self):
+        super().exibir_dados(self.capacidade, self.velo_maxima, self.carga_maxima)
+
+# c1 = Caminhao(12, 100, 2000)
+# c1.mostrar_dados()
+
+#EX8 - Classe base: Pessoa nome cpf Subclasses: Aluno: matrícula e curso Funcionario: cargo e salário Crie uma lista com objetos misturados e imprima os dados de todos usando apenas os métodos da classe base.
+class Pessoa():
+    def __init__(self, nome, cpf):
+        self.__nome = nome
+        self.__cpf = cpf
+
+    """GET"""
+    @property
+    def nome(self):
+        return self.__nome
+
+    @property
+    def cpf(self):
+        return self.__cpf
+    
+    def mostrar(self, *args):
+        print(args)
+    
+class Aluno(Pessoa):
+    def __init__(self, nome, cpf, matricula, curso):
+        super().__init__(nome, cpf)
+        self.matricula = matricula
+        self.curso = curso
+    
+    def mostrar(self):
+        super().mostrar(self.nome, self.cpf, self.matricula, self.curso)
+# a1 = Aluno('DAN', 99012, 1012, 'TI')
+# a1.mostrar()
