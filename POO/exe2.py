@@ -318,3 +318,206 @@ class Aluno(Pessoa):
         super().mostrar(self.nome, self.cpf, self.matricula, self.curso)
 # a1 = Aluno('DAN', 99012, 1012, 'TI')
 # a1.mostrar()
+
+#EX9 - Herança: Funcionário e Gerente Crie uma classe Funcionario com atributos nome, salario. Depois crie uma subclasse Gerente, que herda de Funcionario, e adicione o atributo departamento. Implemente um método exibir_dados() para mostrar tudo.
+from abc import ABC, abstractmethod
+class Funcionario(ABC):
+    def __init__(self, nome, salario):
+        self.__nome = nome
+        self.__salario = salario
+    
+    """GET"""
+    @property
+    def nome(self):
+        return self.__nome
+    
+    @property
+    def salario(self):
+        return self.__salario
+    
+    @abstractmethod
+    def exibir_dados(self):
+        print('PRINT DA ABSTRATA')
+
+
+class Gerente(Funcionario):
+    def __init__(self, nome, salario, departamento, pj):
+        super().__init__(nome, salario)
+        self.__departamento = departamento
+        self.__pj = pj
+    
+    """GET"""        
+    @property
+    def departamento(self):
+        return self.__departamento
+    
+    @property
+    def pj(self):
+        return self.__pj
+    
+    
+    def exibir_dados(self):
+        print(f'Nome: {self.nome} - Salário: {self.salario} - Departamento: {self.departamento} - PJ: {self.pj}')
+# g1 = Gerente('Caze', 34500, 'TI', True)
+# g1.exibir_dados()
+
+#EX10 - Crie uma classe Produto com atributos privados __nome e __preco. Adicione métodos get_nome(), set_nome(), get_preco() e set_preco() para acessar/modificar.
+class Produto():
+    def __init__(self, nome, preco):
+        self.__nome = nome
+        self.__preco = preco
+        
+    """GET E SET"""
+    @property
+    def nome(self):
+        return self.__nome
+    
+    @nome.setter
+    def nome(self, nome):
+        self.__nome = nome
+    
+    """GET E SET"""
+    @property
+    def preco(self):
+        return self.__preco
+    
+    @preco.setter
+    def preco(self, preco):
+        self.__preco = preco
+    
+    
+    def mostrar_dados(self):
+        print(f'Nome: {self.nome}, Preço: {self.preco}')
+
+# p1 = Produto('Ancelloti', 12)
+# p1.mostrar_dados()
+# p1.nome = 'Stevelander'
+# p1.mostrar_dados()
+
+
+#EX11 - Crie uma classe Endereco com rua, cidade, estado. Em Pessoa, inclua um atributo endereco que seja um objeto da classe Endereco.
+class Endereco(ABC):
+    def __init__(self, rua, cidade, estado):
+        self.__rua = rua
+        self.__cidade = cidade
+        self.__estado = estado
+    
+    """GET"""
+    @property
+    def rua(self):
+        return self.__rua
+    
+    @property
+    def cidade(self):
+        return self.__cidade
+    
+    @property
+    def estado(self):
+        return self.__estado
+
+    @abstractmethod
+    def mostrar(self):
+        print('AQUI é da ABSTRATA')
+
+class Pessoa(Endereco):
+    def __init__(self, rua, cidade, estado, endereco):
+        super().__init__(rua, cidade, estado)
+        self.__endereco = endereco
+    
+    """GET"""
+    @property
+    def endereco(self):
+        return self.__endereco
+    
+    def mostrar(self):
+        print(f'Rua: {self.rua}, Cidade: {self.cidade}, Estado: {self.estado}, Endereço: {self.endereco}')
+
+# p1 = Pessoa('Rua dos Damoios', 'Jacareí', 'SP', 'Av Corno Rico Arrombado')
+# p1.mostrar()
+
+#EX12 - Crie uma superclasse Animal com um método falar(). Crie subclasses Cachorro e Gato que sobrescrevam o método para latir e miar.
+class Animal(ABC):
+    def __init__(self):
+        pass
+    
+    @abstractmethod
+    def mostrar(self):
+        print('TUFÃO SICLONE FODA')
+    
+
+class Cachorro(Animal):
+    def __init__(self):
+        pass
+    
+    def mostrar(self):
+        print('BARULHO CACHORRO')
+
+class Gato(Animal):
+    def __init__(self):
+        pass
+    
+    def mostrar(self):
+        print('BARULHO GATO')
+
+  
+# c1 = Cachorro()
+# c1.mostrar()
+# g1 = Gato()
+# g1.mostrar()
+
+#EX13 - Em uma classe Livro, com atributos titulo, autor, ano, implemente o método __str__ para que imprimir o objeto mostre as informações do livro.
+class Livro():
+    def __init__(self, titulo, autor, ano):
+        self.__titulo = titulo
+        self.__autor = autor
+        self.__ano = ano
+    
+    def __str__(self):
+        return f'Print legal do nome {self.__titulo}'
+    
+    def __repr__(self):
+        return f'titulo={self.__titulo!r}'
+
+# l = Livro('Superman', 'Kalel', 2016)
+# print(l)
+# print(repr(l))
+
+#EX14 -Crie uma classe Temperatura com um atributo celsius. Implemente uma propriedade fahrenheit que retorne a conversão automática, e permita alterar a temperatura em Fahrenheit também.
+class Temperatura():
+    def __init__(self, celsius):
+        self.__celsius = celsius
+    
+    
+    """GET"""
+    @property
+    def celsius(self):
+        return self.__celsius
+    
+    def calcular(self):
+        valor = (self.celsius * 1.8) + 32
+        print(f'Celsius: {self.celsius} - Fahrenheit: {valor}')
+
+# t = Temperatura(30)
+# t.calcular()
+
+#EX15 - Crie um sistema que permita cadastrar vários Alunos, armazenando-os em uma lista. Cada aluno tem nome, idade, curso. Implemente funções para listar, buscar e excluir alunos.  
+class Sistema():
+    def __init__(self):
+        self.__dicionario = {}
+    """GET"""
+    @property
+    def dicionario(self):
+        return self.__dicionario
+
+    
+    def cadastro(self):
+        for x in range(5):
+            nome = input('Nome: ')
+            idade = int(input('Idade: '))
+            curso = input('Curso: ')
+            self.dicionario.update({f'Aluno_{x}':[nome,idade,curso]})
+        print(self.dicionario)
+
+# s = Sistema()
+# s.cadastro()
+
