@@ -348,3 +348,102 @@ class Professor(Base):
 # a1.mostrar()
 # p1 = Professor('MAT', 10000, 'Oscar', 56, 889900, 29988, 'M')
 # p1.mostrar()
+
+"""POLIMORFISMO"""
+class Animal():
+    def __init__(self):
+        pass
+    """DEF FALAR PARA O POLIMORFISMO"""
+    def falar(self):
+        raise NotImplemented('Essa bomba aqui não é pra voce acessar nao o caraio')
+
+class Cachorro(Animal):
+    def __init__(self):
+        pass
+    
+    def falar(self):
+        print('Barulho do cachorro')
+
+class Gato(Animal):
+    def __init__(self):
+        pass
+    
+    def falar(self):
+        print('Barulho do gato')
+
+# cachorro = Cachorro()
+# gato = Gato()
+# cachorro.falar()
+# gato.falar()
+
+
+"""CLASSE ABSTRATA"""
+#abstratas - Não são instânciadas, não seram criados objetos da classe
+from abc import ABC, abstractmethod
+class Pessoa(ABC):
+    def __init__(self, nome, sexo):
+        self.nome = nome
+        self.sexo = sexo
+        
+    @abstractmethod
+    def falar(self):
+        pass
+
+class Professor(Pessoa):
+    def __init__(self, nome, sexo=''):
+        super().__init__(nome, sexo='12')
+    
+    def ler(self):
+        print('LER', self.idade, self.nome)
+    def falar(self):
+        print('LER',  self.nome, self.sexo)
+        
+# p1 = Professor('pintomole')
+# p1.falar()
+
+
+class Pagamento(ABC):
+    def __init__(self, pagamento):
+        self.pagamento = pagamento
+        
+    @abstractmethod
+    def pagar(self):
+        pass
+
+class Pix(Pagamento):
+    def __init__(self, pagamento):
+        super().__init__(pagamento)
+    
+    def pagar(self):
+        print('PAGOU COM O PIX')
+# pix1 = Pix('Fazer o pix')
+# pix1.pagar()
+
+"""HERANÇA MULTIPLA"""
+class Funcionario():
+    def falar(self):
+        print('Trabalhando')
+
+
+class Front(Funcionario):
+    def __init__(self):
+        super().__init__()
+    def falar(self):
+        print('Trabalhar Front-End')
+        
+class Back(Funcionario):
+    def falar(self):
+        print('Trabalhar Back-End')
+
+class Full(Back, Front):
+    # def falar(self):
+    #     print('FULL')
+    pass
+      
+# f1 = Front()
+# b1 = Back()
+# f1.falar()
+# b1.falar()
+
+# ana = Full()
+# ana.falar()
